@@ -1,14 +1,14 @@
 {
-  "name": "node-login",
-  "version": "1.5.0",
-  "description": "A template for quickly building login systems on top of Node.js & MongoDb",
-  "author": "Stephen Braitsch <stephen@braitsch.io>",
+  "name": "supportz",
+  "version": "1.0.0",
+  "description": "A support site with your FAQs and knowledge base.",
+  "author": "Ankit Mekwan <bunty5322@gmail.com>",
   "website": {
-    "url": "https://nodejs-login.herokuapp.com"
+    "url": ""
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:braitsch/node-login.git"
+    "url": "https://bunty5322@bitbucket.org/svsitteam/supportz.git"
   },
   "dependencies": {
     "body-parser": "1.14.1",
