@@ -184,6 +184,51 @@ module.exports = function(app) {
 		});
 	});
 	
+// add edit view & delete categories //
+	
+	app.get('/categories', function(req, res) {
+		if (req.session.user == null){
+			res.redirect('/');
+		}	else{
+			AM.getAllCategories( function(e, categories){
+				res.render('categories', { title : 'Category List', cats : categories });
+			});
+		}
+	});
+	
+	app.get('/add-category', function(req, res) {
+		if (req.session.user == null){
+	// if user is not logged-in redirect back to login page //
+			res.redirect('/');
+		}	else{
+			res.render('add_category', {
+				title : 'Add Category'
+			});
+		}
+	});
+	
+	app.post('/add-category', function(req, res){
+		AM.addNewCategory({
+			name 	: req.body['name']
+		}, function(e){
+			if (e){
+				res.status(400).send(e);
+			}	else{
+				res.status(200).send('ok');
+			}
+		});
+	});
+
+	app.post('/delete-category', function(req, res){
+		AM.deleteCategory(req.body.id, function(e, obj){
+			if (!e){
+				res.status(200).send('ok');
+			}	else{
+				res.status(400).send('record not found');
+			}
+	    });
+	});
+
 	app.get('*', function(req, res) { res.render('404', { title: 'Page Not Found'}); });
 
 };

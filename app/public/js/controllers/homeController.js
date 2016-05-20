@@ -22,7 +22,7 @@ function HomeController()
 			type: 'POST',
 			data: { id: $('#userId').val()},
 			success: function(data){
-	 			that.showLockedAlert('Your account has been deleted.<br>Redirecting you back to the homepage.');
+	 			 that.showLockedAlert('Your account has been deleted.<br>Redirecting you back to the homepage.');
 			},
 			error: function(jqXHR){
 				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
@@ -38,7 +38,7 @@ function HomeController()
 			type: "POST",
 			data: {logout : true},
 			success: function(data){
-	 			that.showLockedAlert('You are now logged out.<br>Redirecting you back to the homepage.');
+	 			window.location.href = '/';
 			},
 			error: function(jqXHR){
 				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);

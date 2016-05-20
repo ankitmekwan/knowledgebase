@@ -33,6 +33,7 @@ db.open(function(e, d){
 });
 
 var accounts = db.collection('accounts');
+var categories = db.collection('categories');
 
 /* login validation methods */
 
@@ -209,5 +210,45 @@ var findByMultipleFields = function(a, callback)
 		function(e, results) {
 		if (e) callback(e)
 		else callback(null, results)
+	});
+}
+
+/* category insertion, update & deletion methods */
+
+exports.addNewCategory = function(newData, callback)
+{
+	categories.findOne({name:newData.name}, function(e, o) {
+		if (o){
+			callback('name-taken');
+		}	else{
+		// append date stamp when record was created //
+			newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
+			categories.insert(newData, {safe: true}, callback);
+		}
+	});
+}
+
+exports.updateCategory = function(newData, callback)
+{
+	categories.findOne({_id:getObjectId(newData.id)}, function(e, o){
+		o.name 		= newData.name;
+		categories.save(o, {safe: true}, function(e) {
+			if (e) callback(e);
+			else callback(null, o);
+		});
+	});
+}
+
+exports.deleteCategory = function(id, callback)
+{
+	categories.remove({_id: getObjectId(id)}, callback);
+}
+
+exports.getAllCategories = function(callback)
+{
+	categories.find().toArray(
+		function(e, res) {
+		if (e) callback(e)
+		else callback(null, res)
 	});
 }
