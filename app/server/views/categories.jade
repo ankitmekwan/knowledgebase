@@ -1,0 +1,31 @@
+
+extends layout
+
+block content
+	#category-grid.well
+		.row
+			.col-md-12
+				h2
+				a(href='/add-category')#category-grid-btn1.btn.btn-success
+					| Add
+				hr
+				table.table.table-bordered.table-striped
+					thead
+						tr
+							th(width='60%') Name
+							th Created
+							th
+					tbody
+					- for cat in cats
+						tr
+							td= cat.name
+							td= cat.date
+							td
+								button(type='button', onclick='deleteCategory(\'#{cat._id}\')').btn.btn-danger
+									| Delete
+	include modals/alert
+	include modals/confirm
+
+block scripts
+	script(src='/js/views/category.js')
+	script(src='/js/controllers/categoryController.js')

@@ -1,0 +1,13 @@
+
+extends layout
+
+block content
+
+	include category
+	include modals/alert
+	include modals/confirm
+
+block scripts
+	script(src='/js/views/add_category.js')
+	script(src='/js/controllers/categoryController.js')
+	script(src='/js/form-validators/categoryValidator.js')

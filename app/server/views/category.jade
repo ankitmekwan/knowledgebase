@@ -1,0 +1,26 @@
+
+// preset form values if we receive a categorydata object //
+- category = typeof(cdata) != 'undefined' ? cdata : { }
+// store the categoryId on the client side in a hidden input field //
+input(type='hidden', value= category._id)#categoryId
+
+#category-form-container
+	form(method="post")#category-form.form-horizontal.well
+		.row
+			.col-md-12
+				h2
+				h6#sub1
+				hr
+				.form-group
+					label.control-label.col-sm-2 Name
+					.col-sm-9
+						input.form-control#name-tf(type='text', name='name', value= category.name)
+				hr
+				.form-buttons
+					button(type='button')#category-form-btn1.btn.btn-default
+					button(type='submit')#category-form-btn2.btn.btn-primary
+				.clearfix
+
+// display form errors in a custom modal window //
+
+include modals/form-errors
