@@ -25,7 +25,7 @@ html(lang='en')
 							li
 								a(href='/home') Account Settings
 							li
-								a(href='/category') Manage Categories
+								a(href='/categories') Manage Categories
 							li
 								a(href='/article') Manage Articles
 						ul.nav.navbar-nav.navbar-right
@@ -34,6 +34,10 @@ html(lang='en')
 									| Logout
 
 			block content
+
+			footer
+				p
+					&copy; 2015 Company, Inc.
 
 		script(src='/vendor/jquery.min.js')
 		script(src='/vendor/jquery.form.min.js')

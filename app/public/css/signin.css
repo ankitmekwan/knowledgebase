@@ -44,3 +44,6 @@ body {
 .form-signin a.forgot-password {
   float: left;
 }
+footer {
+  margin-top: 20px;
+}

@@ -25,8 +25,13 @@ html(lang='en')
 				button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign in
 				a#forgot-password.forgot-password(href='#') Forgot passowrd 
 				a#create-account.create-account(href='/signup') Create account 
-	include modals/alert
-	include modals/lost-password
+
+				footer
+					p
+						| &copy; 2015 Company, Inc.
+
+		include modals/alert
+		include modals/lost-password
 
 	script(src='/vendor/jquery.min.js')
 	script(src='/vendor/jquery.form.min.js')
