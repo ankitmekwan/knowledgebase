@@ -208,15 +208,21 @@ module.exports = function(app) {
 	});
 	
 	app.post('/add-category', function(req, res){
-		AM.addNewCategory({
-			name 	: req.body['name']
-		}, function(e){
-			if (e){
-				res.status(400).send(e);
-			}	else{
-				res.status(200).send('ok');
-			}
-		});
+		if (req.session.user == null){
+	// if user is not logged-in redirect back to login page //
+			res.redirect('/');
+		}	else{
+			AM.addNewCategory({
+				name 	: req.body['name'],
+				user 	: req.session.user
+			}, function(e){
+				if (e){
+					res.status(400).send(e);
+				}	else{
+					res.status(200).send('ok');
+				}
+			});
+		}
 	});
 
 	app.post('/delete-category', function(req, res){

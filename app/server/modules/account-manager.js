@@ -228,17 +228,6 @@ exports.addNewCategory = function(newData, callback)
 	});
 }
 
-exports.updateCategory = function(newData, callback)
-{
-	categories.findOne({_id:getObjectId(newData.id)}, function(e, o){
-		o.name 		= newData.name;
-		categories.save(o, {safe: true}, function(e) {
-			if (e) callback(e);
-			else callback(null, o);
-		});
-	});
-}
-
 exports.deleteCategory = function(id, callback)
 {
 	categories.remove({_id: getObjectId(id)}, callback);
