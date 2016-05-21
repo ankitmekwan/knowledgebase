@@ -1,0 +1,13 @@
+
+extends layout
+
+block content
+
+	include article
+	include modals/alert
+	include modals/confirm
+
+block scripts
+	script(src='/js/views/add_article.js')
+	script(src='/js/controllers/articleController.js')
+	script(src='/js/form-validators/articleValidator.js')

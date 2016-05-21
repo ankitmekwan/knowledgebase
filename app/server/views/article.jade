@@ -1,0 +1,41 @@
+
+// preset form values if we receive a articledata object //
+- article = typeof(cdata) != 'undefined' ? cdata : { }
+// store the articleId on the client side in a hidden input field //
+input(type='hidden', value= article._id)#articleId
+
+#article-form-container
+	form(method="post")#article-form.form-horizontal.well
+		.row
+			.col-md-12
+				h2
+				h6#sub1
+				hr
+				.form-group
+					label.control-label.col-sm-2 Title
+					.col-sm-9
+						input.form-control#title-tf(type='text', name='title', value= article.title)
+				.form-group
+					label.control-label.col-sm-2 Category
+					.col-sm-9
+						select.form-control#category-list(name='category')
+							each item in cats
+								option(selected=item.name == article.category)= item.name
+				.form-group
+					label.control-label.col-sm-2 Tags
+					.col-sm-9
+						input.form-control#tags-tf(type='text', name='tags', value= article.tags)
+				.form-group
+					label.control-label.col-sm-2 Article
+					.col-sm-9
+						textarea(name='article')
+				hr
+				.form-buttons
+					.col-sm-2
+					button(type='button')#article-form-btn1.btn.btn-default
+					button(type='submit')#article-form-btn2.btn.btn-primary
+				.clearfix
+
+// display form errors in a custom modal window //
+
+include modals/form-errors

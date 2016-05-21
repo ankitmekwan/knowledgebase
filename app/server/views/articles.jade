@@ -1,0 +1,35 @@
+
+extends layout
+
+block content
+	#article-grid.well
+		.row
+			.col-md-12
+				h2
+				a(href='/add-article')#article-grid-btn1.btn.btn-success
+					| Add
+				hr
+				table.table.table-bordered.table-striped
+					thead
+						tr
+							th(width='60%') Title
+							th Created
+							th
+							th
+					tbody
+					- for art in arts
+						tr
+							td= art.title
+							td= art.date
+							td
+								a(href='/edit-article/#{art._id}').btn.btn-default
+									| Edit
+							td
+								button(type='button', onclick='deleteArticle(\'#{art._id}\')').btn.btn-danger
+									| Delete
+	include modals/alert
+	include modals/confirm
+
+block scripts
+	script(src='/js/views/article.js')
+	script(src='/js/controllers/articleController.js')

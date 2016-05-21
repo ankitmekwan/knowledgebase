@@ -34,6 +34,7 @@ db.open(function(e, d){
 
 var accounts = db.collection('accounts');
 var categories = db.collection('categories');
+var articles = db.collection('articles');
 
 /* login validation methods */
 
@@ -236,6 +237,35 @@ exports.deleteCategory = function(id, callback)
 exports.getAllCategories = function(email, callback)
 {
 	categories.find({"user.email": email}).toArray(
+		function(e, res) {
+		if (e) callback(e)
+		else callback(null, res)
+	});
+}
+
+/* article insertion, update & deletion methods */
+
+exports.addNewArticle = function(newData, callback)
+{
+	articles.findOne({title:newData.title}, function(e, o) {
+		if (o){
+			callback('title-taken');
+		}	else{
+		// append date stamp when record was created //
+			newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
+			articles.insert(newData, {safe: true}, callback);
+		}
+	});
+}
+
+exports.deleteArticle = function(id, callback)
+{
+	articles.remove({_id: getObjectId(id)}, callback);
+}
+
+exports.getAllArticles = function(email, callback)
+{
+	articles.find({"user.email": email}).toArray(
 		function(e, res) {
 		if (e) callback(e)
 		else callback(null, res)

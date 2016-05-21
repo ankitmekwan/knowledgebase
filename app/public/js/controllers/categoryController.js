@@ -4,6 +4,9 @@ function CategoryController()
 // bind event listeners to button clicks //
 	var that = this;
 
+// redirect to homepage when cancel button is clicked //
+	$('#category-form-btn1').click(function(){ window.location.href = '/categories';});
+
 // handle user logout //
 	$('#btn-logout').click(function(){ that.attemptLogout(); });
 

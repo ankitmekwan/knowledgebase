@@ -235,6 +235,60 @@ module.exports = function(app) {
 	    });
 	});
 
+// add edit view & delete articles //
+	
+	app.get('/articles', function(req, res) {
+		if (req.session.user == null){
+			res.redirect('/');
+		}	else{
+			AM.getAllArticles(req.session.user.email, function(e, articles){
+				res.render('articles', { title : 'Article List', arts : articles });
+			});
+		}
+	});
+	
+	app.get('/add-article', function(req, res) {
+		if (req.session.user == null){
+	// if user is not logged-in redirect back to login page //
+			res.redirect('/');
+		}	else{
+			AM.getAllCategories(req.session.user.email, function(e, categories){
+				res.render('add_article', { title : 'Add Article', cats : categories });
+			});
+		}
+	});
+
+	app.post('/add-article', function(req, res){
+		if (req.session.user == null){
+	// if user is not logged-in redirect back to login page //
+			res.redirect('/');
+		}	else{
+			AM.addNewArticle({
+				title 	: req.body['title'],
+				tags 	: req.body['tags'] != null && req.body['tags'] != '' ? req.body['tags'].split(',') : '',
+				category: req.body['category'],
+				article : req.body['article'], 
+				user 	: req.session.user
+			}, function(e){
+				if (e){
+					res.status(400).send(e);
+				}	else{
+					res.status(200).send('ok');
+				}
+			});
+		}
+	});
+
+	app.post('/delete-article', function(req, res){
+		AM.deleteArticle(req.body.id, function(e, obj){
+			if (!e){
+				res.status(200).send('ok');
+			}	else{
+				res.status(400).send('record not found');
+			}
+	    });
+	});
+
 	app.get('*', function(req, res) { res.render('404', { title: 'Page Not Found'}); });
 
 };

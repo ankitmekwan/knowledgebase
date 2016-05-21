@@ -8,6 +8,7 @@ html(lang='en')
 		meta(name='author', content='Ankit Mekwan')
 		title Supportz: Home
 		link(href='/vendor/bootstrap.min.css', rel='stylesheet')
+		link(href='/vendor/summernote/summernote.css', rel='stylesheet')
 		link(href='/css/navbar.css', rel='stylesheet')
 	body
 		.container
@@ -27,7 +28,7 @@ html(lang='en')
 							li
 								a(href='/categories') Manage Categories
 							li
-								a(href='/article') Manage Articles
+								a(href='/articles') Manage Articles
 						ul.nav.navbar-nav.navbar-right
 							li.active
 								a#btn-logout(href='#')
@@ -41,5 +42,6 @@ html(lang='en')
 		script(src='/vendor/jquery.min.js')
 		script(src='/vendor/jquery.form.min.js')
 		script(src='/vendor/bootstrap.min.js')
+		script(src='/vendor/tinymce/js/tinymce/tinymce.min.js')
 
 		block scripts
