@@ -258,6 +258,19 @@ exports.addNewArticle = function(newData, callback)
 	});
 }
 
+exports.updateArticle = function(newData, callback)
+{
+	articles.findOne({_id:getObjectId(newData.id)}, function(e, o){
+		o.tags 		= newData.tags;
+		o.category 	= newData.category;
+		o.article 	= newData.article;
+		articles.save(o, {safe: true}, function(e) {
+			if (e) callback(e);
+			else callback(null, o);
+		});
+	});
+}
+
 exports.deleteArticle = function(id, callback)
 {
 	articles.remove({_id: getObjectId(id)}, callback);
@@ -266,6 +279,15 @@ exports.deleteArticle = function(id, callback)
 exports.getAllArticles = function(email, callback)
 {
 	articles.find({"user.email": email}).toArray(
+		function(e, res) {
+		if (e) callback(e)
+		else callback(null, res)
+	});
+}
+
+exports.findArticleById = function(id, callback)
+{
+	articles.findOne({_id: getObjectId(id)},
 		function(e, res) {
 		if (e) callback(e)
 		else callback(null, res)

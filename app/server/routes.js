@@ -289,6 +289,39 @@ module.exports = function(app) {
 	    });
 	});
 
+	app.get('/edit-article/:articleId', function(req, res) {
+		if (req.session.user == null){
+	// if user is not logged-in redirect back to login page //
+			res.redirect('/');
+		}	else{
+			AM.getAllCategories(req.session.user.email, function(e, categories){
+				AM.findArticleById(req.params.articleId, function(e, article){
+					res.render('edit_article', { title : 'Edit Article', cats : categories, cdata: article });
+				});
+			});
+		}
+	});
+	
+	app.post('/edit-article/:articleId', function(req, res){
+		if (req.session.user == null){
+			res.redirect('/');
+		}	else{
+			AM.updateArticle({
+				id		: req.params.articleId,
+				tags 	: req.body['tags'] != null && req.body['tags'] != '' ? req.body['tags'].split(',') : '',
+				category: req.body['category'],
+				article : req.body['article'], 
+				user 	: req.session.user
+			}, function(e, o){
+				if (e){
+					res.status(400).send('error-updating-article');
+				}	else{
+					res.status(200).send('ok');
+				}
+			});
+		}
+	});
+
 	app.get('*', function(req, res) { res.render('404', { title: 'Page Not Found'}); });
 
 };
