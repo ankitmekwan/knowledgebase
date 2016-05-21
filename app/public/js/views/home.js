@@ -31,6 +31,7 @@ $(document).ready(function(){
 	
 	$('#account-form h2').text('Account Settings');
 	$('#account-form #sub1').text('Here are the current settings for your account.');
+	$('#email-tf').attr('disabled', 'disabled');
 	$('#user-tf').attr('disabled', 'disabled');
 	$('#account-form-btn1').hide();
 	$('#account-form-btn1').html('Delete');

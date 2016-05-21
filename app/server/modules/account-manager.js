@@ -233,9 +233,9 @@ exports.deleteCategory = function(id, callback)
 	categories.remove({_id: getObjectId(id)}, callback);
 }
 
-exports.getAllCategories = function(callback)
+exports.getAllCategories = function(email, callback)
 {
-	categories.find().toArray(
+	categories.find({"user.email": email}).toArray(
 		function(e, res) {
 		if (e) callback(e)
 		else callback(null, res)

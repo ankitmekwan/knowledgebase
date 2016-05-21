@@ -190,7 +190,7 @@ module.exports = function(app) {
 		if (req.session.user == null){
 			res.redirect('/');
 		}	else{
-			AM.getAllCategories( function(e, categories){
+			AM.getAllCategories(req.session.user.email, function(e, categories){
 				res.render('categories', { title : 'Category List', cats : categories });
 			});
 		}
