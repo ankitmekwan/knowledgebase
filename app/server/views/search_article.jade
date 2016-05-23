@@ -1,0 +1,27 @@
+
+extends layout
+
+block content
+	#article-grid.well
+		.search-classic
+			.input-group
+				input#articleSearch.form-control(type='text', placeholder='Search...')
+				span.input-group-btn
+					button#searchButton.btn.btn-primary(type='button')
+						i.fa.fa-search
+						|  Search
+			h3 Search results for '#{search}'
+			- for art in cdata
+				hr
+				.search-result
+					h4
+						a(href='#')  #{art.title}
+					a(href='#')  #{art.tags}
+					article!= art.article
+	include modals/alert
+	include modals/confirm
+
+block scripts
+	script(src='/vendor/readmore.min.js')
+	script(src='/js/views/search_article.js')
+	script(src='/js/controllers/searchController.js')

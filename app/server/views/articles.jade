@@ -6,8 +6,16 @@ block content
 		.row
 			.col-md-12
 				h2
-				a(href='/add-article')#article-grid-btn1.btn.btn-success
-					| Add
+				.row
+					.col-md-3
+						a(href='/add-article')#article-grid-btn1.btn.btn-success
+							| Add
+					.col-md-6
+						.input-group.stylish-input-group
+							input#articleSearch.form-control(type='text', placeholder='Search')
+							span.input-group-addon
+								button#searchButton(type='submit')
+									span.glyphicon.glyphicon-search
 				hr
 				table.table.table-bordered.table-striped
 					thead

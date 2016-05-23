@@ -324,6 +324,17 @@ module.exports = function(app) {
 		}
 	});
 
+	app.get('/search-article/:search', function(req, res) {
+		if (req.session.user == null){
+	// if user is not logged-in redirect back to login page //
+			res.redirect('/');
+		}	else{
+			AM.searchArticle(req.params.search, req.session.user.email, function(e, articles){
+				res.render('search_article', { title : 'Search Article', cdata: articles, search: req.params.search, udata : req.session.user });
+			});
+		}
+	});
+	
 	app.get('/subdomain/:thesubdomain/', function(req, res) {
 	  AM.getAccountByUserName(req.params.thesubdomain, function(o){
 			if (o){
