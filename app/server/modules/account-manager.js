@@ -294,7 +294,7 @@ exports.findArticleById = function(id, callback)
 }
 
 exports.searchArticle =  function(search, email, callback) {
-    articles.find({"user.email": email}, {title:1, tags:1, article:1}, {$text: {$search: search}}).toArray(
+    articles.find({"user.email": email, $text: {$search: search}}).toArray(
 		function(e, res) {
 			if (e) callback(e)
 			else callback(null, res)
