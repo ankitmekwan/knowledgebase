@@ -191,7 +191,7 @@ module.exports = function(app) {
 			res.redirect('/');
 		}	else{
 			AM.getAllCategories(req.session.user.email, function(e, categories){
-				res.render('categories', { title : 'Category List', cats : categories });
+				res.render('categories', { title : 'Category List', cats : categories, udata : req.session.user });
 			});
 		}
 	});
@@ -202,7 +202,8 @@ module.exports = function(app) {
 			res.redirect('/');
 		}	else{
 			res.render('add_category', {
-				title : 'Add Category'
+				title : 'Add Category',
+				udata : req.session.user
 			});
 		}
 	});
@@ -242,7 +243,7 @@ module.exports = function(app) {
 			res.redirect('/');
 		}	else{
 			AM.getAllArticles(req.session.user.email, function(e, articles){
-				res.render('articles', { title : 'Article List', arts : articles });
+				res.render('articles', { title : 'Article List', arts : articles, udata : req.session.user });
 			});
 		}
 	});
@@ -253,7 +254,7 @@ module.exports = function(app) {
 			res.redirect('/');
 		}	else{
 			AM.getAllCategories(req.session.user.email, function(e, categories){
-				res.render('add_article', { title : 'Add Article', cats : categories });
+				res.render('add_article', { title : 'Add Article', cats : categories, udata : req.session.user });
 			});
 		}
 	});
@@ -296,7 +297,7 @@ module.exports = function(app) {
 		}	else{
 			AM.getAllCategories(req.session.user.email, function(e, categories){
 				AM.findArticleById(req.params.articleId, function(e, article){
-					res.render('edit_article', { title : 'Edit Article', cats : categories, cdata: article });
+					res.render('edit_article', { title : 'Edit Article', cats : categories, cdata: article, udata : req.session.user });
 				});
 			});
 		}
@@ -308,6 +309,7 @@ module.exports = function(app) {
 		}	else{
 			AM.updateArticle({
 				id		: req.params.articleId,
+				title 	: req.body['title'], 
 				tags 	: req.body['tags'] != null && req.body['tags'] != '' ? req.body['tags'].split(',') : '',
 				category: req.body['category'],
 				article : req.body['article'], 
@@ -322,6 +324,16 @@ module.exports = function(app) {
 		}
 	});
 
+	app.get('/subdomain/:thesubdomain/', function(req, res) {
+	  AM.getAccountByUserName(req.params.thesubdomain, function(o){
+			if (o){
+				res.render('index', { title: 'Support'});
+			}	else{
+				res.redirect('/home');
+			}
+		});
+	});
+ 
 	app.get('*', function(req, res) { res.render('404', { title: 'Page Not Found'}); });
 
 };

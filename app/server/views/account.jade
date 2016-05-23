@@ -17,9 +17,9 @@ input(type='hidden', value= user._id)#userId
 						input.form-control#name-tf(type='text', name='name', value= user.name)
 
 				.form-group
-					label.control-label.col-sm-2 Email
+					label.control-label.col-sm-2 Username
 					.col-sm-9
-						input.form-control#email-tf(type='text', name='email', value= user.email)
+						input.form-control#user-tf(type='text', name='user', value= user.user).disabled
 
 				.form-group
 					label.control-label.col-sm-2 Location
@@ -29,10 +29,11 @@ input(type='hidden', value= user._id)#userId
 								option(selected=item.name == user.country)= item.name
 				hr
 				h6#sub2
+				
 				.form-group
-					label.control-label.col-sm-2 Username
+					label.control-label.col-sm-2 Email
 					.col-sm-9
-						input.form-control#user-tf(type='text', name='user', value= user.user).disabled
+						input.form-control#email-tf(type='text', name='email', value= user.email)
 
 				.form-group
 					label.control-label.col-sm-2 Password

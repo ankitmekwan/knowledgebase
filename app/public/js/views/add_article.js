@@ -17,9 +17,6 @@ $(document).ready(function(){
 			if (status == 'success') $('.modal-alert').modal('show');
 		},
 		error : function(e){
-			if (e.responseText == 'title-taken'){
-			    av.showInvalidTitle();
-			}
 		}
 	});
 	$('#title-tf').focus();

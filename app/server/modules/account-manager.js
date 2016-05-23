@@ -40,7 +40,7 @@ var articles = db.collection('articles');
 
 exports.autoLogin = function(user, pass, callback)
 {
-	accounts.findOne({user:user}, function(e, o) {
+	accounts.findOne({email:user}, function(e, o) {
 		if (o){
 			o.pass == pass ? callback(o) : callback(null);
 		}	else{
@@ -51,7 +51,7 @@ exports.autoLogin = function(user, pass, callback)
 
 exports.manualLogin = function(user, pass, callback)
 {
-	accounts.findOne({user:user}, function(e, o) {
+	accounts.findOne({email:user}, function(e, o) {
 		if (o == null){
 			callback('user-not-found');
 		}	else{
@@ -139,6 +139,11 @@ exports.getAccountByEmail = function(email, callback)
 	accounts.findOne({email:email}, function(e, o){ callback(o); });
 }
 
+exports.getAccountByUserName = function(user, callback)
+{
+	accounts.findOne({user:user}, function(e, o){ callback(o); });
+}
+
 exports.validateResetLink = function(email, passHash, callback)
 {
 	accounts.find({ $and: [{email:email, pass:passHash}] }, function(e, o){
@@ -218,7 +223,7 @@ var findByMultipleFields = function(a, callback)
 
 exports.addNewCategory = function(newData, callback)
 {
-	categories.findOne({name:newData.name}, function(e, o) {
+	categories.findOne({name:newData.name, 'user.email':newData.user.email}, function(e, o) {
 		if (o){
 			callback('name-taken');
 		}	else{
@@ -247,20 +252,14 @@ exports.getAllCategories = function(email, callback)
 
 exports.addNewArticle = function(newData, callback)
 {
-	articles.findOne({title:newData.title}, function(e, o) {
-		if (o){
-			callback('title-taken');
-		}	else{
-		// append date stamp when record was created //
-			newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
-			articles.insert(newData, {safe: true}, callback);
-		}
-	});
+	newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
+	articles.insert(newData, {safe: true}, callback);
 }
 
 exports.updateArticle = function(newData, callback)
 {
 	articles.findOne({_id:getObjectId(newData.id)}, function(e, o){
+		o.title 	= newData.title;
 		o.tags 		= newData.tags;
 		o.category 	= newData.category;
 		o.article 	= newData.article;

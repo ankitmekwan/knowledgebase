@@ -25,7 +25,7 @@ $(document).ready(function(){
 	
 	$('#account-form h2').text('Signup');
 	$('#account-form #sub1').text('Please tell us a little about yourself');
-	$('#account-form #sub2').text('Choose your username & password');
+	$('#account-form #sub2').text('Choose your email & password');
 	$('#account-form-btn1').html('Cancel');
 	$('#account-form-btn2').html('Submit');
 	$('#account-form-btn2').addClass('btn-primary');

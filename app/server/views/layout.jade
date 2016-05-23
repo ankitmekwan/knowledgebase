@@ -9,6 +9,7 @@ html(lang='en')
 		title Supportz: Home
 		link(href='/vendor/bootstrap.min.css', rel='stylesheet')
 		link(href='/vendor/summernote/summernote.css', rel='stylesheet')
+		link(href='/css/font-awesome.min.css', rel='stylesheet')
 		link(href='/css/navbar.css', rel='stylesheet')
 	body
 		.container
@@ -29,6 +30,8 @@ html(lang='en')
 								a(href='/categories') Manage Categories
 							li
 								a(href='/articles') Manage Articles
+							li
+								a(href='http://#{udata.user}.localhost:3000', target='_blank') Website
 						ul.nav.navbar-nav.navbar-right
 							li.active
 								a#btn-logout(href='#')

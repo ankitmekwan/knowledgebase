@@ -29,7 +29,6 @@ $(document).ready(function(){
 // customize the article signup form //
 	
 	$('#article-form h2').text('Edit Article');
-	$('#title-tf').attr('disabled', 'disabled');
 	$('#article-form-btn1').html('Cancel');
 	$('#article-form-btn2').html('Submit');
 	

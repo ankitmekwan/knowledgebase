@@ -1,6 +1,7 @@
 
 var http = require('http');
 var express = require('express');
+var subdomain  = require('express-subdomain-handler');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var errorHandler = require('errorhandler');
@@ -10,6 +11,7 @@ var MongoStore = require('connect-mongo')(session);
 var app = express();
 
 app.locals.pretty = true;
+app.use(subdomain({ base : 'localhost', removeWWW : true }));
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/app/server/views');
 app.set('view engine', 'jade');
