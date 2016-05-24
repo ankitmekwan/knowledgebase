@@ -334,7 +334,7 @@ module.exports = function(app) {
 			});
 		}
 	});
-	
+
 	app.get('/subdomain/:thesubdomain/', function(req, res) {
 	  AM.getAccountByUserName(req.params.thesubdomain, function(o){
 			if (o){

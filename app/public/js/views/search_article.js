@@ -3,7 +3,7 @@ $(document).ready(function(){
 
     var sc = new SearchController();
 
-	$('article').readmore({collapsedHeight:70});
+	$('article').readmore({collapsedHeight:40});
 
 	$('#searchButton').click(function(){
         var search = $('#articleSearch').val();
