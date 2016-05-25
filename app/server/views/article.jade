@@ -20,7 +20,7 @@ input(type='hidden', value= article._id)#articleId
 					.col-sm-9
 						select.form-control#category-list(name='category')
 							each item in cats
-								option(selected=item.name == article.category)= item.name
+								option(value=item._id, selected=item._id == article.category)= item.name
 				.form-group
 					label.control-label.col-sm-2 Tags
 					.col-sm-9

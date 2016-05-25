@@ -3,6 +3,8 @@ var CT = require('./modules/country-list');
 var AM = require('./modules/account-manager');
 var EM = require('./modules/email-dispatcher');
 
+var moment 		= require('moment');
+
 module.exports = function(app) {
 
 // main login page //
@@ -190,8 +192,8 @@ module.exports = function(app) {
 		if (req.session.user == null){
 			res.redirect('/');
 		}	else{
-			AM.getAllCategories(req.session.user.email, function(e, categories){
-				res.render('categories', { title : 'Category List', cats : categories, udata : req.session.user });
+			AM.getAllCategories(req.session.user, function(e, categories){
+				res.render('categories', { title : 'Category List', cats : categories, udata : req.session.user, moment: moment });
 			});
 		}
 	});
@@ -242,7 +244,7 @@ module.exports = function(app) {
 		if (req.session.user == null){
 			res.redirect('/');
 		}	else{
-			AM.getAllArticles(req.session.user.email, function(e, articles){
+			AM.getAllArticles(req.session.user._id, function(e, articles){
 				res.render('articles', { title : 'Article List', arts : articles, udata : req.session.user });
 			});
 		}
@@ -253,7 +255,7 @@ module.exports = function(app) {
 	// if user is not logged-in redirect back to login page //
 			res.redirect('/');
 		}	else{
-			AM.getAllCategories(req.session.user.email, function(e, categories){
+			AM.getAllCategories(req.session.user, function(e, categories){
 				res.render('add_article', { title : 'Add Article', cats : categories, udata : req.session.user });
 			});
 		}
@@ -265,11 +267,11 @@ module.exports = function(app) {
 			res.redirect('/');
 		}	else{
 			AM.addNewArticle({
-				title 	: req.body['title'],
-				tags 	: req.body['tags'] != null && req.body['tags'] != '' ? req.body['tags'].split(',') : '',
-				category: req.body['category'],
-				article : req.body['article'], 
-				user 	: req.session.user
+				title 		: req.body['title'],
+				tags 		: req.body['tags'],
+				category_id	: req.body['category'],
+				article 	: req.body['article'], 
+				user 		: req.session.user
 			}, function(e){
 				if (e){
 					res.status(400).send(e);
@@ -295,7 +297,7 @@ module.exports = function(app) {
 	// if user is not logged-in redirect back to login page //
 			res.redirect('/');
 		}	else{
-			AM.getAllCategories(req.session.user.email, function(e, categories){
+			AM.getAllCategories(req.session.user, function(e, categories){
 				AM.findArticleById(req.params.articleId, function(e, article){
 					res.render('edit_article', { title : 'Edit Article', cats : categories, cdata: article, udata : req.session.user });
 				});
@@ -308,12 +310,12 @@ module.exports = function(app) {
 			res.redirect('/');
 		}	else{
 			AM.updateArticle({
-				id		: req.params.articleId,
-				title 	: req.body['title'], 
-				tags 	: req.body['tags'] != null && req.body['tags'] != '' ? req.body['tags'].split(',') : '',
-				category: req.body['category'],
-				article : req.body['article'], 
-				user 	: req.session.user
+				id			: req.params.articleId,
+				title 		: req.body['title'], 
+				tags 		: req.body['tags'],
+				category_id	: req.body['category'],
+				article 	: req.body['article'], 
+				user 		: req.session.user
 			}, function(e, o){
 				if (e){
 					res.status(400).send('error-updating-article');
@@ -329,7 +331,7 @@ module.exports = function(app) {
 	// if user is not logged-in redirect back to login page //
 			res.redirect('/');
 		}	else{
-			AM.searchArticle(req.params.search, req.session.user.email, function(e, articles){
+			AM.searchArticle(req.params.search, req.session.user, function(e, articles){
 				res.render('search_article', { title : 'Search Article', cdata: articles, search: req.params.search, udata : req.session.user });
 			});
 		}

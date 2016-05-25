@@ -19,7 +19,7 @@ block content
 					- for cat in cats
 						tr
 							td= cat.name
-							td= cat.date
+							td= moment(cat.date).format('LLL')
 							td
 								button(type='button', onclick='deleteCategory(\'#{cat._id}\')').btn.btn-danger
 									| Delete

@@ -12,9 +12,7 @@ $(document).ready(function(){
 			if (status == 'success') $('.modal-alert').modal('show');
 		},
 		error : function(e){
-			if (e.responseText == 'name-taken'){
-			    cv.showInvalidName();
-			}
+			console.log(e);
 		}
 	});
 	$('#name-tf').focus();
