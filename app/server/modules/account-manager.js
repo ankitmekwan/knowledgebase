@@ -26,12 +26,12 @@ db.once("open", function(callback) {
 var Schema = mongoose.Schema;
 
 var accountSchema = new Schema({
-  	name 	: { type : String, default : '', trim : true },
-  	email 	: { type : String, default : '', trim : true },
-  	user 	: { type : String, default : '', trim : true },
-  	pass 	: { type : String, default : ''},
-  	country : { type : String, default : '', trim : true },
- 	date 	: { type : Date, default : Date.now }
+	name 	: { type : String, default : '', trim : true },
+	email 	: { type : String, default : '', trim : true },
+	user 	: { type : String, default : '', trim : true },
+	pass 	: { type : String, default : ''},
+	country : { type : String, default : '', trim : true },
+	date 	: { type : Date, default : Date.now }
 });
 
 accountSchema.path('name').required(true, 'User name cannot be blank');
@@ -49,7 +49,7 @@ accountSchema.pre('save', function(next) {
   
   // if created_at doesn't exist, add to that field
   if (!this.date)
-    this.date = currentDate;
+	this.date = currentDate;
 
   next();
 });
@@ -57,9 +57,9 @@ accountSchema.pre('save', function(next) {
 mongoose.model('Account', accountSchema);
 
 var categorySchema = new Schema({
-  	name 	: { type : String, default : '', trim : true },
- 	user	: { type : Schema.ObjectId, ref : 'User' },
- 	date 	: { type : Date, default : Date.now }
+	name 	: { type : String, default : '', trim : true },
+	user	: { type : Schema.ObjectId, ref : 'User' },
+	date 	: { type : Date, default : Date.now }
 });
 
 categorySchema.path('name').required(true, 'Category name cannot be blank');
@@ -74,7 +74,7 @@ categorySchema.pre('save', function(next) {
   
   // if created_at doesn't exist, add to that field
   if (!this.date)
-    this.date = currentDate;
+	this.date = currentDate;
 
   next();
 });
@@ -85,12 +85,12 @@ var getTags = tags => tags.join(',');
 var setTags = tags => tags.split(',');
 
 var ArticleSchema = new Schema({
-  	title 	: { type : String, default : '', trim : true },
- 	article	: { type : String, default : '', trim : true },
- 	category: { type : Schema.ObjectId, ref : 'Category' },
- 	tags: { type: [], get: getTags, set: setTags },
- 	user	: { type : Schema.ObjectId, ref : 'Account' },
- 	date 	: { type : Date, default : Date.now }
+	title 	: { type : String, default : '', trim : true },
+	article	: { type : String, default : '', trim : true },
+	category: { type : Schema.ObjectId, ref : 'Category' },
+	tags: { type: [], get: getTags, set: setTags },
+	user	: { type : Schema.ObjectId, ref : 'Account' },
+	date 	: { type : Date, default : Date.now }
 });
 
 ArticleSchema.path('title').required(true, 'Article title cannot be blank');
@@ -105,7 +105,7 @@ ArticleSchema.pre('save', function(next) {
   
   // if created_at doesn't exist, add to that field
   if (!this.date)
-    this.date = currentDate;
+	this.date = currentDate;
 
   next();
 });
@@ -161,11 +161,11 @@ exports.addNewAccount = function(newData, callback)
 					saltAndHash(newData.pass, function(hash){
 
 						var account = new Account({
-						  	name: newData.name,
-						  	email: newData.email,
-						  	user: newData.user,
-						  	pass: hash,
-						  	country: newData.country
+							name: newData.name,
+							email: newData.email,
+							user: newData.user,
+							pass: hash,
+							country: newData.country
 						});
 
 						account.save(function(err) {
@@ -186,18 +186,18 @@ exports.updateAccount = function(newData, callback)
 		Account.findOneAndUpdate({_id:getObjectId(newData.id)}, {name: newData.name, country: newData.country}, function(err, user){
 			if (err) callback(err, null);
 
-  			// we have the updated user returned to us
-  			console.log('User updated successfully!');
-  			callback(null, user);
+			// we have the updated user returned to us
+			console.log('User updated successfully!');
+			callback(null, user);
 		});
 	} else {
 		saltAndHash(newData.pass, function(hash){
 			Account.findOneAndUpdate({_id:getObjectId(newData.id)}, {name: newData.name, country: newData.country, pass:hash}, function(err, user){
 				if (err) callback(err, null);
 
-	  			// we have the updated user returned to us
-	  			console.log('User updated successfully!');
-	  			callback(null, user);
+				// we have the updated user returned to us
+				console.log('User updated successfully!');
+				callback(null, user);
 			});
 		});
 	}
@@ -221,9 +221,9 @@ exports.updatePassword = function(email, newPass, callback)
 exports.deleteAccount = function(id, callback)
 {
 	Account.findOneAndRemove({ _id: getObjectId(id) }, function(err, user) {
-  		if (err) throw err;
-  		console.log('User successfully deleted!');
-	  	callback();
+		if (err) throw err;
+		console.log('User successfully deleted!');
+		callback();
 	});
 }
 
@@ -317,8 +317,8 @@ var findByMultipleFields = function(a, callback)
 exports.addNewCategory = function(newData, callback)
 {
 	var category = new Category({
-	  	name: newData.name,
-	  	user: newData.user
+		name: newData.name,
+		user: newData.user
 	});
 
 	category.save(function(err) {
@@ -331,9 +331,9 @@ exports.addNewCategory = function(newData, callback)
 exports.deleteCategory = function(id, callback)
 {
 	Category.findOneAndRemove({ _id: getObjectId(id) }, function(err, user) {
-  		if (err) throw err;
-  		console.log('Category successfully deleted!');
-	  	callback();
+		if (err) throw err;
+		console.log('Category successfully deleted!');
+		callback();
 	});
 }
 
@@ -351,11 +351,11 @@ exports.getAllCategories = function(user, callback)
 exports.addNewArticle = function(newData, callback)
 {
 	var article = new Article({
-	  	title	: newData.title,
+		title	: newData.title,
 		tags 	: newData.tags,
 		category: getObjectId(newData.category_id),
 		article : newData.article,
-	  	user 	: newData.user
+		user 	: newData.user
 	});
 
 	article.save(function(err) {
@@ -379,9 +379,9 @@ exports.updateArticle = function(newData, callback)
 exports.deleteArticle = function(id, callback)
 {
 	Article.findOneAndRemove({ _id: getObjectId(id) }, function(err, user) {
-  		if (err) throw err;
-  		console.log('Category successfully deleted!');
-	  	callback();
+		if (err) throw err;
+		console.log('Category successfully deleted!');
+		callback();
 	});
 }
 
@@ -394,6 +394,24 @@ exports.getAllArticles = function(user, callback)
 	});
 }
 
+exports.getAllArticlesByCategory = function(categoryId, callback)
+{
+	Article.find({category: getObjectId(categoryId)}, {title:1},
+		function(e, res) {
+			if (e) callback(e)
+			else callback(null, res)
+	});
+}
+
+exports.getLatestArticles = function(user, callback)
+{
+	var a = Article.find({user: user}, {title:1}).sort({'date': -1}).limit(5);
+	a.exec(function(e, res) {
+		if (e) callback(e)
+		else callback(null, res)
+	});
+}
+
 exports.findArticleById = function(id, callback)
 {
 	Article.findOne({_id: getObjectId(id)},
@@ -403,10 +421,23 @@ exports.findArticleById = function(id, callback)
 	});
 }
 
-exports.searchArticle =  function(search, user, callback) {
-    Article.find({user: user, $text: {$search: search}},
+exports.searchArticle = function(search, user, callback) {
+	Article.find({user: user, $text: {$search: search}},
 		function(e, res) {
 			if (e) callback(e)
 			else callback(null, res)
-    });
+	});
+}
+
+exports.getArticleCategories = function(user, callback) {
+	Article.aggregate(
+		{$match: {user : user._id}},
+		{$group: {_id: "$category", total:{$sum: 1}}},
+		function(e, results) {
+			Category.populate( results, { "path": "_id" }, function(err,res) {
+				if (err) callback(err);
+				callback(null, res);
+			});
+		}
+	);
 }

@@ -340,9 +340,29 @@ module.exports = function(app) {
 	app.get('/subdomain/:thesubdomain/', function(req, res) {
 	  AM.getAccountByUserName(req.params.thesubdomain, function(o){
 			if (o){
-				res.render('index', { title: 'Support'});
+				AM.getArticleCategories(o, function(e, categories){
+					res.render('index', { title : 'Knowledgebase', cdata: categories});
+				});
 			}	else{
 				res.redirect('/home');
+			}
+		});
+	});
+ 
+	app.post('/subdomain/:thesubdomain/load-articles', function(req, res){
+		AM.getAllArticlesByCategory(req.body.id, function(e, obj){
+			if (!e){
+				res.status(200).send(obj);
+			}
+	    });
+	});
+
+	app.post('/subdomain/:thesubdomain/latest-articles', function(req, res) {
+	  AM.getAccountByUserName(req.params.thesubdomain, function(o){
+			if (o){
+				AM.getLatestArticles(o, function(e, obj){
+					res.status(200).send(obj);
+				});
 			}
 		});
 	});
