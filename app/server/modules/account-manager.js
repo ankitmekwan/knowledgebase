@@ -394,7 +394,7 @@ exports.getAllArticles = function(user, callback)
 	});
 }
 
-exports.getAllArticlesByCategory = function(categoryId, callback)
+exports.getAllArticlesTitleByCategory = function(categoryId, callback)
 {
 	Article.find({category: getObjectId(categoryId)}, {title:1},
 		function(e, res) {
@@ -450,5 +450,23 @@ exports.findArticleByIdWCategory = function(id, callback)
 			if (err) callback(err);
 			callback(null, res);
 		});
+	});
+}
+
+exports.getAllArticlesByCategory = function(categoryId, callback)
+{
+	Article.find({category: getObjectId(categoryId)},
+		function(e, res) {
+			if (e) callback(e)
+			else callback(null, res)
+	});
+}
+
+exports.findCategoryNameById = function(id, callback)
+{
+	Category.findOne({_id: getObjectId(id)}, {name:1},
+		function(e, res) {
+			if (e) callback(e)
+			else callback(null, res)
 	});
 }

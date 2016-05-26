@@ -19,4 +19,6 @@ $(document).ready(function(){
 		}
 	});
 
+	$('article').readmore({collapsedHeight:40});
+
 });

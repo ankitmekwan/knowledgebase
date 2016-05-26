@@ -350,7 +350,7 @@ module.exports = function(app) {
 	});
  
 	app.post('/subdomain/:thesubdomain/load-articles', function(req, res){
-		AM.getAllArticlesByCategory(req.body.id, function(e, obj){
+		AM.getAllArticlesTitleByCategory(req.body.id, function(e, obj){
 			if (!e){
 				res.status(200).send(obj);
 			}
@@ -372,6 +372,20 @@ module.exports = function(app) {
 			if (o){
 				AM.findArticleByIdWCategory(req.params.articleId, function(e, article){
 					res.render('single_index', { title : article.title, cdata: article, tags: article.tags.trim() != '' ? article.tags.split(',') : '', moment: moment });
+				});
+			}	else{
+				res.redirect('/home');
+			}
+		});
+	});
+ 
+	app.get('/subdomain/:thesubdomain/category/:categoryId', function(req, res) {
+	  AM.getAccountByUserName(req.params.thesubdomain, function(o){
+			if (o){
+				AM.getAllArticlesByCategory(req.params.categoryId, function(e, articles){
+					AM.findCategoryNameById(req.params.categoryId, function(e, categoryName){
+						res.render('single_category', { title : categoryName, cdata: articles, categoryName: categoryName, moment: moment });
+					});
 				});
 			}	else{
 				res.redirect('/home');
