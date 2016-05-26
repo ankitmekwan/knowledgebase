@@ -470,3 +470,13 @@ exports.findCategoryNameById = function(id, callback)
 			else callback(null, res)
 	});
 }
+
+exports.searchArticleWCategory = function(search, user, callback) {
+	var a = Article.find({user: user, $text: {$search: search}});
+	a.exec(function(e, results) {
+		Category.populate( results, { "path": "category" }, function(err,res) {
+			if (err) callback(err);
+			callback(null, res);
+		});
+	});
+}

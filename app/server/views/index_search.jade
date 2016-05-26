@@ -23,20 +23,30 @@ html(lang='en')
 			.row
 				.col-md-8.padding-20
 					.row
-						// ARTICLES CATEGORIES SECTION
+						// ARTICLES
 						.fb-heading
-							| Knowledge Base
+							i.fa.fa-search
+							|  Search Results for: #{search}
 						hr.style-three
-						.row
-							- for cat in cdata
-								.col-md-6.margin-bottom-20
-									div(id=cat._id._id).fat-heading-abb
-										a(href='category/#{cat._id._id}')
+						- for art in cdata
+							.panel.panel-default
+								.article-heading-abb
+									a(href='/article/#{art._id}')
+										i.fa.fa-pencil-square-o
+										|  #{art.title}
+								.article-info
+									.art-date
+										a(href='#')
+											i.fa.fa-calendar-o
+											|  #{moment(cdata.date).format('LLL')}
+									.art-category
+										a(href='#')
 											i.fa.fa-folder
-											|  #{cat._id.name} 
-											span.cat-count (#{cat.total})
-									div(id=cat._id._id + 'artList').fat-content-small.padding-left-30
-						// END ARTICLES CATEOGIRES SECTION
+											|  #{art.category.name} 
+								.article-content
+									article
+										p.block-with-text!= art.article
+						// END ARTICLES
 				// SIDEBAR STUFF
 				.col-md-4.padding-20
 					.row.margin-bottom-30
@@ -66,4 +76,4 @@ html(lang='en')
 		script(src='https://use.fontawesome.com/f5561e785a.js')
 		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
 		script(src='http://localhost:3000/vendor/readmore.min.js')
-		script(src='http://localhost:3000/js/views/index.js')
+		script(src='http://localhost:3000/js/views/index_search.js')

@@ -1,0 +1,35 @@
+doctype html
+html(lang='en')
+	head
+		meta(charset='utf-8')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		title 404
+		link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', rel='stylesheet')
+		link(href='http://localhost:3000/css/style.css', rel='stylesheet')
+	body
+		.container.featured-area-default.padding-30
+			row.text-center
+				.col-md-12.padding-20
+					img(src='http://localhost:3000/images/404.png', alt='404', width='200px', height='200px')
+					h1 Oops, looks like we could not find the page you requested
+					br
+					a.btn.btn-info.btn-wide(href='http://localhost:3000')
+						i.fa.fa-arrow-circle-left
+						|  Back to home page
+		br
+		br
+		br
+		// COPYRIGHT INFO
+		.container-fluid.footer-copyright.marg30
+			.container
+				.pull-left
+					| Copyright © 2016 
+					a(href='http://knowledge-base.site') knowledge-base
+		// END COPYRIGHT INFO
+		// LOADING ENDING JAVASCRIPTS
+		script(src='http://code.jquery.com/jquery-2.2.4.min.js')
+		script(src='https://use.fontawesome.com/f5561e785a.js')
+		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+		script(src='http://localhost:3000/vendor/readmore.min.js')
+		script(src='http://localhost:3000/js/views/index.js')

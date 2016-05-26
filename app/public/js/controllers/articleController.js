@@ -11,15 +11,15 @@ function ArticleController()
 	$('#btn-logout').click(function(){ that.attemptLogout(); });
 
 	$('#searchButton').click(function(){
-        var search = $('#articleSearch').val();
-        window.location.href = '/search-article/'+search;
-    });
+		var search = $('#articleSearch').val();
+		window.location.href = '/search-article/'+search;
+	});
 
-    $('#articleSearch').keypress(function(e){
-        if(e.which == 13){//Enter key pressed
-            $('#searchButton').click();//Trigger search button click event
-        }
-    });
+	$('#articleSearch').keypress(function(e){
+		if(e.which == 13){//Enter key pressed
+			$('#searchButton').click();//Trigger search button click event
+		}
+	});
 
 	this.attemptLogout = function()
 	{
@@ -29,7 +29,7 @@ function ArticleController()
 			type: "POST",
 			data: {logout : true},
 			success: function(data){
-	 			window.location.href = '/';
+				window.location.href = '/';
 			},
 			error: function(jqXHR){
 				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
@@ -45,7 +45,7 @@ function ArticleController()
 			type: 'POST',
 			data: { id: articleId},
 			success: function(data){
-	 			that.showLockedAlert('Article has been deleted.');
+				that.showLockedAlert('Article has been deleted.');
 			},
 			error: function(jqXHR){
 				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);

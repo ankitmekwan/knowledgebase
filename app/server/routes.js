@@ -344,7 +344,7 @@ module.exports = function(app) {
 					res.render('index', { title : 'Knowledgebase', cdata: categories});
 				});
 			}	else{
-				res.redirect('/home');
+				res.redirect('/404');
 			}
 		});
 	});
@@ -374,7 +374,7 @@ module.exports = function(app) {
 					res.render('single_index', { title : article.title, cdata: article, tags: article.tags.trim() != '' ? article.tags.split(',') : '', moment: moment });
 				});
 			}	else{
-				res.redirect('/home');
+				res.redirect('/404');
 			}
 		});
 	});
@@ -388,10 +388,24 @@ module.exports = function(app) {
 					});
 				});
 			}	else{
-				res.redirect('/home');
+				res.redirect('/404');
 			}
 		});
 	});
+
+	app.get('/subdomain/:thesubdomain/search/:search', function(req, res) {
+	  AM.getAccountByUserName(req.params.thesubdomain, function(o){
+			if (o){
+				AM.searchArticleWCategory(req.params.search, o, function(e, articles){
+					res.render('index_search', { title : req.params.search, cdata: articles, search: req.params.search, moment: moment });
+				});
+			}	else{
+				res.redirect('/404');
+			}
+		});
+	});
+
+	app.get('/subdomain/:thesubdomain/404', function(req, res) { res.render('index_404', { title: 'Page Not Found'}); });
  
 	app.get('*', function(req, res) { res.render('404', { title: 'Page Not Found'}); });
 
