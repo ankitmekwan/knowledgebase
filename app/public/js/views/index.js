@@ -11,7 +11,7 @@ $(document).ready(function(){
 				var str = '<ul>';
 				$.each(obj, function (index, value) {
 					str += '<li>';
-					str += '<a href="#">';
+					str += '<a href="/article/' + value._id + '">';
 					str += '<i class="fa fa-file-text-o"></i>';
 					str += ' ' + value.title + ' ';
 					str += '</a>';
@@ -33,7 +33,7 @@ $(document).ready(function(){
 			var str = '<ul>';
 			$.each(obj, function (index, value) {
 				str += '<li>';
-				str += '<a href="#">';
+				str += '<a href="/article/' + value._id + '">';
 				str += '<i class="fa fa-file-text-o"></i>';
 				str += ' ' + value.title + ' ';
 				str += '</a>';

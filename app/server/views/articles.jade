@@ -28,7 +28,7 @@ block content
 					- for art in arts
 						tr
 							td= art.title
-							td= art.date
+							td= moment(art.date).format('LLL')
 							td
 								a(href='/edit-article/#{art._id}').btn.btn-default
 									| Edit

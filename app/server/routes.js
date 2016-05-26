@@ -245,7 +245,7 @@ module.exports = function(app) {
 			res.redirect('/');
 		}	else{
 			AM.getAllArticles(req.session.user._id, function(e, articles){
-				res.render('articles', { title : 'Article List', arts : articles, udata : req.session.user });
+				res.render('articles', { title : 'Article List', arts : articles, udata : req.session.user, moment: moment });
 			});
 		}
 	});
@@ -363,6 +363,18 @@ module.exports = function(app) {
 				AM.getLatestArticles(o, function(e, obj){
 					res.status(200).send(obj);
 				});
+			}
+		});
+	});
+ 
+	app.get('/subdomain/:thesubdomain/article/:articleId', function(req, res) {
+	  AM.getAccountByUserName(req.params.thesubdomain, function(o){
+			if (o){
+				AM.findArticleByIdWCategory(req.params.articleId, function(e, article){
+					res.render('single_index', { title : article.title, cdata: article, tags: article.tags.trim() != '' ? article.tags.split(',') : '', moment: moment });
+				});
+			}	else{
+				res.redirect('/home');
 			}
 		});
 	});

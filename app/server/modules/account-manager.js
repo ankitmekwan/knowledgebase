@@ -441,3 +441,14 @@ exports.getArticleCategories = function(user, callback) {
 		}
 	);
 }
+
+exports.findArticleByIdWCategory = function(id, callback)
+{
+	var a = Article.findOne({_id: getObjectId(id)});
+	a.exec(function(e, results) {
+		Category.populate( results, { "path": "category" }, function(err,res) {
+			if (err) callback(err);
+			callback(null, res);
+		});
+	});
+}
