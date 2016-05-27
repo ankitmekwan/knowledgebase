@@ -1,69 +1,23 @@
-doctype html
-html(lang='en')
-	head
-		meta(charset='utf-8')
-		meta(http-equiv='X-UA-Compatible', content='IE=edge')
-		meta(name='viewport', content='width=device-width, initial-scale=1')
-		title Knowledgebase
-		link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', rel='stylesheet')
-		link(href='http://localhost:3000/css/style.css', rel='stylesheet')
-	body
-		// SEARCH FIELD AREA
-		.searchfield.bg-hed-six
-			.container(style='padding-top: 20px; padding-bottom: 20px;')
-				.row.text-center.margin-bottom-20
-					h1.white  Knowledge Base
-				br
-				.row.search-row
-					input#articleSearch.search(type='text', placeholder='What do you need help with?')
-					button#searchButton.buttonsearch.btn.btn-info.btn-lg Search
-		// END SEARCH FIELD AREA
-		// MAIN SECTION
-		.container.featured-area-default.padding-30
+
+extends index_layout
+
+block content
+	.col-md-8.padding-20
+		.row
+			.fb-heading
+				| Knowledge Base
+			hr.style-three
 			.row
-				.col-md-8.padding-20
-					.row
-						// ARTICLES CATEGORIES SECTION
-						.fb-heading
-							| Knowledge Base
-						hr.style-three
-						.row
-							- for cat in cdata
-								.col-md-6.margin-bottom-20
-									div(id=cat._id._id).fat-heading-abb
-										a(href='category/#{cat._id._id}')
-											i.fa.fa-folder
-											|  #{cat._id.name} 
-											span.cat-count (#{cat.total})
-									div(id=cat._id._id + 'artList').fat-content-small.padding-left-30
-						// END ARTICLES CATEOGIRES SECTION
-				// SIDEBAR STUFF
-				.col-md-4.padding-20
-					.row.margin-bottom-30
-						.col-md-12
-							.support-container
-								h2.support-heading Need more Support?
-								|               If you cannot find an answer in the knowledgebase, you can 
-								a(href='#') contact us
-								|  for further help.
-					.row.margin-top-20
-						.col-md-12
-							.fb-heading-small
-								| Latest Articles
-							hr.style-three
-							#latestAtrList.fat-content-small.padding-left-10
-				// END SIDEBAR STUFF
-		// END MAIN SECTION
-		// COPYRIGHT INFO
-		.container-fluid.footer-copyright.marg30
-			.container
-				.pull-left
-					| Copyright © 2016 
-					a(href='http://knowledge-base.site') knowledge-base
-		// END COPYRIGHT INFO
-		// LOADING ENDING JAVASCRIPTS
-		script(src='http://code.jquery.com/jquery-2.2.4.min.js')
-		script(src='https://use.fontawesome.com/f5561e785a.js')
-		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
-		script(src='http://localhost:3000/vendor/readmore.min.js')
-		script(src='http://localhost:3000/js/views/index.js')
+				- for cat in cdata
+					.col-md-6.margin-bottom-20
+						div(id=cat._id._id).fat-heading-abb
+							a(href='category/#{cat._id._id}')
+								i.fa.fa-folder
+								|  #{cat._id.name} 
+								span.cat-count (#{cat.total})
+						div(id=cat._id._id + 'artList').fat-content-small.padding-left-30
+
+block scripts
+
+	script(src='http://localhost:3000/vendor/readmore.min.js')
+	script(src='http://localhost:3000/js/views/index.js')
