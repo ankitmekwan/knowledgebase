@@ -22,10 +22,8 @@ $(document).ready(function(){
 	$('.modal-alert .modal-body p').html('New category has been created.</br>Click OK to return to the list category.');
 	$('.modal-alert button').click(function(){window.location.href = '/categories';});
 
-// customize the category signup form //
+// customize the category new form //
 	
 	$('#category-form h2').text('Add Category');
-	$('#category-form-btn1').html('Cancel');
-	$('#category-form-btn2').html('Submit');
 	
 });

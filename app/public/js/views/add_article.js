@@ -1,5 +1,5 @@
 
-tinymce.init({ selector:'textarea', height : 500 });
+tinymce.init({ selector:'textarea', height : 200 });
 
 $(document).ready(function(){
 
@@ -26,10 +26,8 @@ $(document).ready(function(){
 	$('.modal-alert .modal-body p').html('New article has been created.</br>Click OK to return to the list article.');
 	$('.modal-alert button').click(function(){window.location.href = '/articles';});
 
-// customize the article signup form //
+// customize the article new form //
 	
-	$('#article-form h2').text('Add Article');
-	$('#article-form-btn1').html('Cancel');
-	$('#article-form-btn2').html('Submit');
+	$('#article-form-container h3').text('Add New Article');
 	
 });

@@ -2,51 +2,90 @@ doctype html
 html(lang='en')
 	head
 		meta(charset='utf-8')
-		meta(http-equiv='X-UA-Compatible', content='IE=edge')
-		meta(name='viewport', content='width=device-width, initial-scale=1')
-		meta(name='description', content='')
-		meta(name='author', content='Ankit Mekwan')
-		title knowledge-base: Home
-		link(href='/vendor/bootstrap.min.css', rel='stylesheet')
-		link(href='/vendor/summernote/summernote.css', rel='stylesheet')
+		title Knowledge Base :: Home
+		meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+		meta(name='apple-mobile-web-app-capable', content='yes')
+		link(href='/css/bootstrap.min.css', rel='stylesheet')
+		link(href='/css/bootstrap-responsive.min.css', rel='stylesheet')
+		link(href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600', rel='stylesheet')
 		link(href='/css/font-awesome.min.css', rel='stylesheet')
-		link(href='/css/navbar.css', rel='stylesheet')
-		link(href='/css/search.css', rel='stylesheet')
+		link(href='/css/ui-lightness/jquery-ui-1.10.0.custom.min.css', rel='stylesheet')
+		link(href='/css/base-admin-3.css', rel='stylesheet')
+		link(href='/css/base-admin-3-responsive.css', rel='stylesheet')
+		link(href='/css/custom.css', rel='stylesheet')
 	body
-		.container
-			nav.navbar.navbar-default
-				.container-fluid
-					.navbar-header
-						button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
-							span.sr-only Toggle navigation
-							span.icon-bar
-							span.icon-bar
-							span.icon-bar
-						a.navbar-brand(href='#') knowledge-base
-					#navbar.navbar-collapse.collapse
-						ul.nav.navbar-nav
-							li
-								a(href='/home') Account Settings
-							li
-								a(href='/categories') Manage Categories
-							li
-								a(href='/articles') Manage Articles
-							li
-								a(href='http://#{udata.user}.localhost:3000', target='_blank') Website
-						ul.nav.navbar-nav.navbar-right
-							li.active
-								a#btn-logout(href='#')
-									| Logout
+		nav.navbar.navbar-inverse(role='navigation')
+			.container
+				.navbar-header
+					button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
+						span.sr-only Toggle navigation
+						i.icon-cog
+					a.navbar-brand(href='/home') Knowledge Base
+				.collapse.navbar-collapse.navbar-ex1-collapse
+					ul.nav.navbar-nav.navbar-right
+						li.dropdown
+							a.dropdown-toggle(href='javscript:;', data-toggle='dropdown')
+								i.icon-cog
+								|  Settings
+								b.caret
+							ul.dropdown-menu
+								li
+									a(href='/home') Account Settings
+								li
+									a(href='javascript:;') Help
+						li.dropdown
+							a.dropdown-toggle(href='javscript:;', data-toggle='dropdown')
+								i.icon-user
+								|  #{udata.name}
+								b.caret
+							ul.dropdown-menu
+								li
+									a#btn-logout(href='#') Logout
+					.navbar-form.navbar-right(role='search')
+						.form-group
+							input#articleSearch.form-control.input-sm.search-query(type='text', placeholder='Search')
 
-			block content
+		.subnavbar
+			.subnavbar-inner
+				.container
+					a.subnav-toggle(href='javascript:;', data-toggle='collapse', data-target='.subnav-collapse')
+						span.sr-only Toggle navigation
+						i.icon-reorder
+					.collapse.subnav-collapse
+						ul.mainnav
+							li#homeBtn
+								a(href='/home')
+									i.icon-home
+									span Home
+							li#catBtn
+								a(href='/categories')
+									i.icon-th
+									span Category
+							li#artBtn
+								a(href='/articles')
+									i.icon-copy
+									span Article
+							li
+								a(href='http://#{udata.user}.localhost:3000', target='_blank')
+									i.icon-external-link
+									span Website
+		.main
+			.container
 
-			footer
-				| Copyright © 2016 
-				a(href='http://knowledge-base.site') knowledge-base
+				block content
 
-		script(src='/vendor/jquery.min.js')
-		script(src='/vendor/jquery.form.min.js')
-		script(src='/vendor/bootstrap.min.js')
-		script(src='/vendor/tinymce/js/tinymce/tinymce.min.js')
+		.footer
+			.container
+				.row
+					#footer-copyright.col-md-6
+						| © 2016 Knowledge base.
+					#footer-terms.col-md-6
+						a(href='http://jumpstartui.com', target='_blank') Terms
+
+		script(src='/js/libs/jquery-1.9.1.min.js')
+		script(src='/js/libs/jquery.form.min.js')
+		script(src='/js/libs/jquery-ui-1.10.0.custom.min.js')
+		script(src='/js/libs/bootstrap.min.js')
+		script(src='/js/libs/tinymce/tinymce.min.js')
 
 		block scripts

@@ -2,39 +2,39 @@
 extends layout
 
 block content
-	#article-grid.well
-		.row
-			.col-md-12
-				h2
-				.row
-					.col-md-3
-						a(href='/add-article')#article-grid-btn1.btn.btn-success
-							| Add
-					.col-md-6
-						.input-group.stylish-input-group
-							input#articleSearch.form-control(type='text', placeholder='Search')
-							span.input-group-addon
-								button#searchButton(type='submit')
-									span.glyphicon.glyphicon-search
-				hr
-				table.table.table-bordered.table-striped
-					thead
-						tr
-							th(width='60%') Title
-							th Created
-							th
-							th
-					tbody
-					- for art in arts
-						tr
-							td= art.title
-							td= moment(art.date).format('LLL')
-							td
-								a(href='/edit-article/#{art._id}').btn.btn-default
-									| Edit
-							td
-								button(type='button', onclick='deleteArticle(\'#{art._id}\')').btn.btn-danger
-									| Delete
+	.row#article-grid
+		.col-md-12
+			.widget.stacked
+				.widget-header
+					i.icon-list
+					h3 Manage Articles
+				.widget-content
+					section#tables
+						.page-header
+							h3
+								|Article List
+								.pull-right
+									a(href='/add-article')#article-grid-btn1.btn.btn-success
+										| Add
+						.table-responsive
+							table.table.table-bordered.table-hover.table-striped
+								thead
+									tr
+										th(width='60%') Title
+										th Created
+										th
+										th
+								tbody
+									- for art in arts
+										tr
+											td= art.title
+											td= moment(art.date).format('LLL')
+											td
+												a(href='/edit-article/#{art._id}').btn.btn-default
+													| Edit
+											td
+												button(type='button', onclick='deleteArticle(\'#{art._id}\')').btn.btn-danger
+													| Delete
 	include modals/alert
 	include modals/confirm
 

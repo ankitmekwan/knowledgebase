@@ -4,6 +4,15 @@ function SearchController()
 // bind event listeners to button clicks //
 	var that = this;
 
+	$('.mainnav li').removeClass('active');
+
+	$('#articleSearch').keypress(function(e){
+		if(e.which == 13){//Enter key pressed
+			var search = $('#articleSearch').val();
+			window.location.href = '/search-article/'+search;
+		}
+	});
+
 // handle user logout //
 	$('#btn-logout').click(function(){ that.attemptLogout(); });
 
@@ -23,12 +32,4 @@ function SearchController()
 		});
 	}
 
-	this.showLockedAlert = function(msg){
-		$('.modal-alert').modal({ show : false, keyboard : false, backdrop : 'static' });
-		$('.modal-alert .modal-header h4').text('Success!');
-		$('.modal-alert .modal-body p').html(msg);
-		$('.modal-alert').modal('show');
-		$('.modal-alert button').click(function(){window.location.href = '/';})
-		setTimeout(function(){window.location.href = '/';}, 3000);
-	}
 }

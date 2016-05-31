@@ -52,7 +52,7 @@ AccountValidator.prototype.showInvalidEmail = function()
 AccountValidator.prototype.showInvalidUserName = function()
 {
 	this.controlGroups[2].addClass('error');
-	this.showErrors(['That username is already in use.']);
+	this.showErrors(['That subdomain is already in use.']);
 }
 
 AccountValidator.prototype.validateForm = function()
@@ -67,7 +67,7 @@ AccountValidator.prototype.validateForm = function()
 	}
 	if (this.validateName(this.formFields[2].val()) == false) {
 		this.controlGroups[2].addClass('error');
-		e.push('Please Choose A Username');
+		e.push('Please Choose A Subdomain');
 	}
 	if (this.validatePassword(this.formFields[3].val()) == false) {
 		this.controlGroups[3].addClass('error');

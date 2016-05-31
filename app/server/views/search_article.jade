@@ -2,26 +2,25 @@
 extends layout
 
 block content
-	#article-grid.well
-		.search-classic
-			.input-group
-				input#articleSearch.form-control(type='text', placeholder='Search...')
-				span.input-group-btn
-					button#searchButton.btn.btn-primary(type='button')
-						i.fa.fa-search
-						|  Search
-			h3 Search results for '#{search}'
-			- for art in cdata
-				hr
-				.search-result
-					h4
-						a(href='#')  #{art.title}
-					a(href='#')  #{art.tags}
-					article!= art.article
+	.row#article-grid
+		.col-md-12
+			.widget.stacked
+				.widget-header
+					i.icon-list
+					h3 Search Articles
+				.widget-content
+					.page-header
+						h3 Search results for '#{search}'
+					- for art in cdata
+						.col-md-8
+							strong
+								a(href='#')  #{art.title}
+							article!= art.article
+							hr
 	include modals/alert
 	include modals/confirm
 
 block scripts
-	script(src='/vendor/readmore.min.js')
+	script(src='/js/libs/readmore.min.js')
 	script(src='/js/views/search_article.js')
 	script(src='/js/controllers/searchController.js')

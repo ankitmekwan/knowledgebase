@@ -16,7 +16,7 @@ module.exports = function(app) {
 	// attempt automatic login //
 			AM.autoLogin(req.cookies.user, req.cookies.pass, function(o){
 				if (o != null){
-				    req.session.user = o;
+					req.session.user = o;
 					res.redirect('/home');
 				}	else{
 					res.render('login', { title: 'Hello - Please Login To Your Account' });
@@ -164,7 +164,7 @@ module.exports = function(app) {
 	
 	app.get('/print', function(req, res) {
 		AM.getAllRecords( function(e, accounts){
-			res.render('print', { title : 'Account List', accts : accounts });
+			res.render('print', { title : 'Account List', accts : accounts, moment: moment });
 		})
 	});
 	
@@ -177,15 +177,9 @@ module.exports = function(app) {
 			}	else{
 				res.status(400).send('record not found');
 			}
-	    });
-	});
-	
-	app.get('/reset', function(req, res) {
-		AM.delAllRecords(function(){
-			res.redirect('/print');	
 		});
 	});
-	
+
 // add edit view & delete categories //
 	
 	app.get('/categories', function(req, res) {
@@ -235,7 +229,7 @@ module.exports = function(app) {
 			}	else{
 				res.status(400).send('record not found');
 			}
-	    });
+		});
 	});
 
 // add edit view & delete articles //
@@ -289,7 +283,7 @@ module.exports = function(app) {
 			}	else{
 				res.status(400).send('record not found');
 			}
-	    });
+		});
 	});
 
 	app.get('/edit-article/:articleId', function(req, res) {
@@ -354,7 +348,7 @@ module.exports = function(app) {
 			if (!e){
 				res.status(200).send(obj);
 			}
-	    });
+		});
 	});
 
 	app.post('/subdomain/:thesubdomain/latest-articles', function(req, res) {

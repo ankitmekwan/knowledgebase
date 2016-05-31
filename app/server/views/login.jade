@@ -2,41 +2,70 @@ doctype html
 html(lang='en')
 	head
 		meta(charset='utf-8')
-		meta(http-equiv='X-UA-Compatible', content='IE=edge')
-		meta(name='viewport', content='width=device-width, initial-scale=1')
-		meta(name='description', content='')
-		meta(name='author', content='Ankit Mekwan')
-		title knowledge-base: Login
-		link(rel='stylesheet', href='/vendor/bootstrap.min.css')
-		link(rel='stylesheet', href='/css/signin.css')
+		title Login :: Knowledge Base
+		meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+		meta(name='apple-mobile-web-app-capable', content='yes')
+		link(href='./css/bootstrap.min.css', rel='stylesheet', type='text/css')
+		link(href='./css/bootstrap-responsive.min.css', rel='stylesheet', type='text/css')
+		link(href='./css/font-awesome.min.css', rel='stylesheet')
+		link(href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600', rel='stylesheet')
+		link(href='./css/ui-lightness/jquery-ui-1.10.0.custom.min.css', rel='stylesheet')
+		link(href='./css/base-admin-3.css', rel='stylesheet')
+		link(href='./css/base-admin-3-responsive.css', rel='stylesheet')
+		link(href='./css/pages/signin.css', rel='stylesheet', type='text/css')
+		link(href='./css/custom.css', rel='stylesheet')
+	body
+		nav.navbar.navbar-inverse(role='navigation')
+			.container
+				.navbar-header
+					button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
+						span.sr-only Toggle navigation
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+					a.navbar-brand(href='./') Knowledge Base
+				.collapse.navbar-collapse.navbar-ex1-collapse
+					ul.nav.navbar-nav.navbar-right
+						li
+							a(href='./signup')
+								| Create an Account
+						li
+							a(href='./')
+								i.icon-chevron-left
+								| Back to Homepage
 
-	.container
-		#login
-			form.form-signin(id='form-login', method='post')
-				h2.form-signin-heading Please sign in
-				label.sr-only(for='inputEmail') Email
-				input#user-tf.form-control(type='text', name='user', placeholder='Email', required='', autofocus='')
-				label.sr-only(for='inputPassword') Password
-				input#pass-tf.form-control(type='password', name='pass', placeholder='Password', required='')
-				.checkbox
-					label
-						input#remember-me(type='checkbox', name='remember-me', value='true')
-						| Remember me
-				button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign in
-				a#forgot-password.forgot-password(href='#') Forgot passowrd 
-				a#create-account.create-account(href='/signup') Create account 
-
-				footer
-					| Copyright © 2016 
-					a(href='http://knowledge-base.site') knowledge-base
+		.account-container.stacked
+			#login.content.clearfix
+				form(id='form-login', method='post')
+					h1 Sign In
+					.login-fields
+						p Sign in using your registered account:
+						.field
+							label(for='user') Email:
+							input#user-tf.form-control.input-lg.username-field(type='text', name='user', value='', placeholder='Email', required='required')
+						.field
+							label(for='pass') Password:
+							input#pass-tf.form-control.input-lg.password-field(type='password', name='pass', value='', placeholder='Password', required='required')
+					.login-actions
+						span.login-checkbox
+							input#remember-me.field.login-checkbox(name='remember-me', value='true', type='checkbox')
+							label.choice(for='Field') Keep me signed in
+						button.login-action.btn.btn-primary Sign In
+		.login-extra
+			| Don't have an account? 
+			a(href='./signup') Sign Up
+			br
+			|   Remind 
+			a#forgot-password(href='#') Password
 
 		include modals/alert
 		include modals/lost-password
 
-	script(src='/vendor/jquery.min.js')
-	script(src='/vendor/jquery.form.min.js')
-	script(src='/vendor/bootstrap.min.js')
-	script(src='/js/views/login.js')
-	script(src='/js/controllers/loginController.js')
-	script(src='/js/form-validators/loginValidator.js')
-	script(src='/js/form-validators/emailValidator.js')
+		script(src='./js/libs/jquery-1.9.1.min.js')
+		script(src='./js/libs/jquery.form.min.js')
+		script(src='./js/libs/jquery-ui-1.10.0.custom.min.js')
+		script(src='./js/libs/bootstrap.min.js')
+		script(src='./js/views/login.js')
+		script(src='./js/controllers/loginController.js')
+		script(src='./js/form-validators/loginValidator.js')
+		script(src='./js/form-validators/emailValidator.js')

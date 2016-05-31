@@ -4,8 +4,15 @@ function CategoryController()
 // bind event listeners to button clicks //
 	var that = this;
 
-// redirect to homepage when cancel button is clicked //
-	$('#category-form-btn1').click(function(){ window.location.href = '/categories';});
+	$('.mainnav li').removeClass('active');
+	$('#catBtn').addClass('active');
+
+	$('#articleSearch').keypress(function(e){
+		if(e.which == 13){//Enter key pressed
+			var search = $('#articleSearch').val();
+			window.location.href = '/search-article/'+search;
+		}
+	});
 
 // handle user logout //
 	$('#btn-logout').click(function(){ that.attemptLogout(); });
@@ -51,8 +58,6 @@ function CategoryController()
 	}
 
 // redirect to homepage when cancel button is clicked //
-	$('#category-grid-btn1').click(function(){ window.location.href = '/new-category';});
-
-	$('#category-grid h2').text('Manage Categories');
+	$('#category-form-btn1').click(function(){ window.location.href = '/categories';});
 
 }

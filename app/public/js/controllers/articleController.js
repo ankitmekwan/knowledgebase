@@ -4,22 +4,18 @@ function ArticleController()
 // bind event listeners to button clicks //
 	var that = this;
 
-// redirect to homepage when cancel button is clicked //
-	$('#article-form-btn1').click(function(){ window.location.href = '/articles';});
-
-// handle user logout //
-	$('#btn-logout').click(function(){ that.attemptLogout(); });
-
-	$('#searchButton').click(function(){
-		var search = $('#articleSearch').val();
-		window.location.href = '/search-article/'+search;
-	});
+	$('.mainnav li').removeClass('active');
+	$('#artBtn').addClass('active');
 
 	$('#articleSearch').keypress(function(e){
 		if(e.which == 13){//Enter key pressed
-			$('#searchButton').click();//Trigger search button click event
+			var search = $('#articleSearch').val();
+			window.location.href = '/search-article/'+search;
 		}
 	});
+
+// handle user logout //
+	$('#btn-logout').click(function(){ that.attemptLogout(); });
 
 	this.attemptLogout = function()
 	{
@@ -62,8 +58,6 @@ function ArticleController()
 	}
 
 // redirect to homepage when cancel button is clicked //
-	$('#article-grid-btn1').click(function(){ window.location.href = '/new-article';});
-
-	$('#article-grid h2').text('Manage Articles');
+	$('#article-form-btn1').click(function(){ window.location.href = '/articles';});
 
 }

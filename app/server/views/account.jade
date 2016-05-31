@@ -4,50 +4,55 @@
 // store the userId on the client side in a hidden input field //
 input(type='hidden', value= user._id)#userId
 
-#account-form-container
-	form(method="post")#account-form.form-horizontal.well
-		.row
-			.col-md-12
-				h2
-				h6#sub1
-				hr
-				.form-group
-					label.control-label.col-sm-2 Name
-					.col-sm-9
-						input.form-control#name-tf(type='text', name='name', value= user.name)
-						.help-block with right aligned icon
-
-				.form-group
-					label.control-label.col-sm-2 Sub Domain
-					.col-sm-9
-						input.form-control#user-tf(type='text', name='user', value= user.user).disabled
-
-				.form-group
-					label.control-label.col-sm-2 Location
-					.col-sm-9
-						select.form-control#country-list(name='country')
-							each item in countries
-								option(selected=item.name == user.country)= item.name
-				hr
-				h6#sub2
-				
-				.form-group
-					label.control-label.col-sm-2 Email
-					.col-sm-9
-						input.form-control#email-tf(type='text', name='email', value= user.email)
-
-				.form-group
-					label.control-label.col-sm-2 Password
-					.col-sm-9
-						input.form-control#pass-tf(type='password', name='pass', value='')
-
-				hr
-				.form-buttons
-					.col-sm-2
-					button(type='button')#account-form-btn1.btn.btn-default
-					button(type='submit')#account-form-btn2.btn.btn-primary
-				.clearfix
-
-// display form errors in a custom modal window //
-
+.row
+	.col-md-8
+		.widget.stacked
+			.widget-header
+				i.icon-user
+				h3 Your Account
+			.widget-content
+				.tabbable
+					ul.nav.nav-tabs
+						li.active
+							a(href='#account-form-container', data-toggle='tab') Profile
+					br
+					.tab-content
+						#account-form-container.tab-pane.active
+							form(method="post")#account-form.form-horizontal.col-md-10
+								fieldset
+									.form-group
+										label.col-md-4(for='user') Sub Domain
+										.col-md-8
+											.input-group
+												span.input-group-addon
+													| http://
+												input#user-tf.form-control(type='text', name='user', value=user.user, disabled='', style='background-color:#fff')
+												span.input-group-addon
+													| .knowledge-base.site
+											p.help-block Your subdomain is for knowledge base site and cannot be changed.
+									.form-group
+										label.col-md-4(for='name') Name
+										.col-md-8
+											input#name-tf.form-control(type='text', name='name', value=user.name)
+									hr
+									br
+									.form-group
+										label.col-md-4(for='email') Email
+										.col-md-8
+											input#email-tf.form-control(type='text', name='email', value=user.email, disabled='')
+									.form-group
+										label.col-md-4(for='password') Password
+										.col-md-8
+											input#pass-tf.form-control(type='password', name='pass', value='')
+									br
+									.form-group
+										.col-md-offset-4.col-md-8
+											button.btn.btn-primary(type='submit') Save
+	.col-md-4
+		.well
+			h4 Extra Info
+			p
+				| Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+			p
+				| Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 include modals/form-errors

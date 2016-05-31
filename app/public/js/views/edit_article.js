@@ -1,5 +1,5 @@
 
-tinymce.init({ selector:'textarea', height : 500 });
+tinymce.init({ selector:'textarea', height : 200 });
 
 $(document).ready(function(){
 
@@ -26,10 +26,8 @@ $(document).ready(function(){
 	$('.modal-alert .modal-body p').html('Article has been updated.</br>Click OK to return to the list article.');
 	$('.modal-alert button').click(function(){window.location.href = '/articles';});
 
-// customize the article signup form //
+// customize the article edit form //
 	
 	$('#article-form h2').text('Edit Article');
-	$('#article-form-btn1').html('Cancel');
-	$('#article-form-btn2').html('Submit');
 	
 });
