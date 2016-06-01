@@ -27,14 +27,15 @@ var Schema = mongoose.Schema;
 
 var accountSchema = new Schema({
 	name 	: { type : String, default : '', trim : true },
+	title 	: { type : String, default : '', trim : true },
 	email 	: { type : String, default : '', trim : true },
 	user 	: { type : String, default : '', trim : true },
 	pass 	: { type : String, default : ''},
-	country : { type : String, default : '', trim : true },
 	date 	: { type : Date, default : Date.now }
 });
 
 accountSchema.path('name').required(true, 'User name cannot be blank');
+accountSchema.path('title').required(true, 'Title cannot be blank');
 accountSchema.path('email').required(true, 'User email cannot be blank');
 accountSchema.path('user').required(true, 'User username cannot be blank');
 accountSchema.path('pass').required(true, 'User password cannot be blank');
@@ -162,10 +163,10 @@ exports.addNewAccount = function(newData, callback)
 
 						var account = new Account({
 							name: newData.name,
+							title: newData.title,
 							email: newData.email,
 							user: newData.user,
-							pass: hash,
-							country: newData.country
+							pass: hash
 						});
 
 						account.save(function(err) {
@@ -183,7 +184,7 @@ exports.addNewAccount = function(newData, callback)
 exports.updateAccount = function(newData, callback)
 {
 	if (newData.pass == '') {
-		Account.findOneAndUpdate({_id:getObjectId(newData.id)}, {name: newData.name, country: newData.country}, function(err, user){
+		Account.findOneAndUpdate({_id:getObjectId(newData.id)}, {name: newData.name, title: newData.title}, function(err, user){
 			if (err) callback(err, null);
 
 			// we have the updated user returned to us
@@ -192,7 +193,7 @@ exports.updateAccount = function(newData, callback)
 		});
 	} else {
 		saltAndHash(newData.pass, function(hash){
-			Account.findOneAndUpdate({_id:getObjectId(newData.id)}, {name: newData.name, country: newData.country, pass:hash}, function(err, user){
+			Account.findOneAndUpdate({_id:getObjectId(newData.id)}, {name: newData.name, title: newData.title, pass:hash}, function(err, user){
 				if (err) callback(err, null);
 
 				// we have the updated user returned to us
@@ -222,7 +223,7 @@ exports.deleteAccount = function(id, callback)
 {
 	Account.findOneAndRemove({ _id: getObjectId(id) }, function(err, user) {
 		if (err) throw err;
-		console.log('User successfully deleted!');
+		console.log('User deleted successfully!');
 		callback();
 	});
 }
@@ -332,7 +333,7 @@ exports.deleteCategory = function(id, callback)
 {
 	Category.findOneAndRemove({ _id: getObjectId(id) }, function(err, user) {
 		if (err) throw err;
-		console.log('Category successfully deleted!');
+		console.log('Category deleted successfully!');
 		callback();
 	});
 }
@@ -380,7 +381,7 @@ exports.deleteArticle = function(id, callback)
 {
 	Article.findOneAndRemove({ _id: getObjectId(id) }, function(err, user) {
 		if (err) throw err;
-		console.log('Category successfully deleted!');
+		console.log('Article deleted successfully!');
 		callback();
 	});
 }

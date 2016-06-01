@@ -3,8 +3,8 @@ function AccountValidator()
 {
 // build array maps of the form inputs & control groups //
 
-	this.formFields = [$('#name-tf'), $('#email-tf'), $('#user-tf'), $('#pass-tf'), $('#terms-tf')];
-	this.controlGroups = [$('#name-cg'), $('#email-cg'), $('#user-cg'), $('#pass-cg'), $('#terms-cg')];
+	this.formFields = [$('#name-tf'), $('#title-tf'), $('#email-tf'), $('#user-tf'), $('#pass-tf'), $('#terms-tf')];
+	this.controlGroups = [$('#name-cg'), $('#title-cg'), $('#email-cg'), $('#user-cg'), $('#pass-cg'), $('#terms-cg')];
 	
 // bind the form-error modal window to this controller to display any errors //
 	
@@ -13,7 +13,7 @@ function AccountValidator()
 	
 	this.validateName = function(s)
 	{
-		return s.length >= 3;
+		return s.length >= 1;
 	}
 	
 	this.validatePassword = function(s)
@@ -55,13 +55,13 @@ function AccountValidator()
 
 AccountValidator.prototype.showInvalidEmail = function()
 {
-	this.controlGroups[1].addClass('error');
+	this.controlGroups[2].addClass('error');
 	this.showErrors(['That email address is already in use.']);
 }
 
 AccountValidator.prototype.showInvalidUserName = function()
 {
-	this.controlGroups[2].addClass('error');
+	this.controlGroups[3].addClass('error');
 	this.showErrors(['That subdomain is already in use.']);
 }
 
@@ -72,19 +72,22 @@ AccountValidator.prototype.validateForm = function()
 	if (this.validateName(this.formFields[0].val()) == false) {
 		this.controlGroups[0].addClass('error'); e.push('Please Enter Your Name');
 	}
-	if (this.validateEmail(this.formFields[1].val()) == false) {
-		this.controlGroups[1].addClass('error'); e.push('Please Enter A Valid Email');
+	if (this.validateName(this.formFields[1].val()) == false) {
+		this.controlGroups[1].addClass('error'); e.push('Please Enter Knowledge Base Title');
 	}
-	if (this.validateName(this.formFields[2].val()) == false) {
-		this.controlGroups[2].addClass('error');
+	if (this.validateEmail(this.formFields[2].val()) == false) {
+		this.controlGroups[2].addClass('error'); e.push('Please Enter A Valid Email');
+	}
+	if (this.validateName(this.formFields[3].val()) == false) {
+		this.controlGroups[3].addClass('error');
 		e.push('Please Choose A Subdomain');
 	}
-	if (this.validatePassword(this.formFields[3].val()) == false) {
-		this.controlGroups[3].addClass('error');
+	if (this.validatePassword(this.formFields[4].val()) == false) {
+		this.controlGroups[4].addClass('error');
 		e.push('Password Should Be At Least 6 Characters');
 	}
-	if (!this.validateTerm(this.formFields[4].prop('checked'))) {
-		this.controlGroups[4].addClass('error');
+	if (!this.validateTerm(this.formFields[5].prop('checked'))) {
+		this.controlGroups[5].addClass('error');
 		e.push('Please select terms');
 	}
 	if (e.length) this.showErrors(e);
