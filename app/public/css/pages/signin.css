@@ -109,19 +109,12 @@ span.login-checkbox > input[type='checkbox'] + label {
     
 	height: 15px; 
 	display: block;
-    padding: 0 0 0 22px;
     margin: 0;
     
     font-size: 12px;
     line-height: 1.2em;
     
-    background: url(../../img/signin/check.png) no-repeat 0 0;
-    
     cursor: pointer;
-}
-
-span.login-checkbox > input[type='checkbox']:checked + label {	
-	background-position: 0 -15px;
 }
 
 /** Text Under Box**/
@@ -221,9 +214,9 @@ span.login-checkbox > input[type='checkbox']:checked + label {
 
 .register span.login-checkbox {
 	position: relative;
-	top: -6px;
-	
-	width: 200px;
+	top: -10px;
+	left: -10px;
+	width: 220px;
 }
 
 .register span.login-checkbox > input[type="checkbox"] + label {
