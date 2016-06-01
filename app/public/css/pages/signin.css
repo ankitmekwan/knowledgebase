@@ -1,21 +1,6 @@
 
-/*------------------------------------------------------------------
-
-[Login/Signup Stylesheet]
-
-	Project:		Base Admin
-	Version:		1.0
-	Last change:	05/21/2012
-	Assigned to:	Rod Howard (rh)
-
--------------------------------------------------------------------*/
-
-
-
-
 /** Base Body Styles **/
 body{ color:#838383; font: 13px/1.7em 'Open Sans';}
-
 
 .account-container {
 	width: 390px; 
@@ -30,11 +15,9 @@ body{ color:#838383; font: 13px/1.7em 'Open Sans';}
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 
-
 }
 
-
-	.login-action {float: right; margin-top: 18px;}
+.login-action {float: right; margin-top: 18px;}
 
 .content {
 	padding: 16px 28px 23px;
@@ -69,9 +52,7 @@ body{ color:#838383; font: 13px/1.7em 'Open Sans';}
 
 .password-field { background: url(../../img/signin/password.png) no-repeat; }
 
-.username-field-error { background: url(../../img/signin/user_error.png) no-repeat; }
 
-.password-field-error { background: url(../../img/signin/password_error.png) no-repeat; }
 
 
 .login-actions {
@@ -109,12 +90,19 @@ span.login-checkbox > input[type='checkbox'] + label {
     
 	height: 15px; 
 	display: block;
+    padding: 0 0 0 22px;
     margin: 0;
     
     font-size: 12px;
     line-height: 1.2em;
     
+    background: url(../../img/signin/check.png) no-repeat 0 0;
+    
     cursor: pointer;
+}
+
+span.login-checkbox > input[type='checkbox']:checked + label {	
+	background-position: 0 -15px;
 }
 
 /** Text Under Box**/
@@ -188,13 +176,6 @@ span.login-checkbox > input[type='checkbox'] + label {
 	text-decoration: none;
 }
 
-
-
-
-
-
-
-
 .register .login-social {
 	margin-bottom: 1em;
 }
@@ -214,19 +195,10 @@ span.login-checkbox > input[type='checkbox'] + label {
 
 .register span.login-checkbox {
 	position: relative;
-	top: -10px;
-	left: -10px;
+	top: -6px;
+	
 	width: 220px;
 }
-
-.register span.login-checkbox > input[type="checkbox"] + label {
-	
-	position: relative;
-	
-	line-height: 1.3em;
-}
-
-
 
 @media (max-width: 480px) {
 	

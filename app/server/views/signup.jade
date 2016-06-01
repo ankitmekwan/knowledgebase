@@ -65,8 +65,8 @@ html(lang='en')
 						input#pass-tf.form-control(type='password', name='pass', value='', placeholder='Password')
 				.login-actions
 					span.login-checkbox
-						input#terms-tf.field.login-checkbox(name='terms', type='checkbox', checked='checked')
-						label.choice(for='terms') By clicking Register, you agree to our Terms.
+						input#terms-tf.field.login-checkbox(name='terms', type='checkbox', value='true')
+						label.choice(for='terms') I have read and agree with the Terms of Use.
 					button.login-action.btn.btn-primary Register
 
 			include modals/form-errors
