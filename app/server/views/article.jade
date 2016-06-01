@@ -12,28 +12,25 @@ input(type='hidden', value= article._id)#articleId
 				h3 
 			.widget-content
 				form(method="post")#article-form
-					.col-md-5
-						.form-group
-							label Title
-							input.form-control#title-tf(type='text', name='titletitle', value= article.title)
-						.form-group
-							label Category
-							select.form-control#category-list(name='category')
-								each item in cats
-									option(value=item._id, selected=item._id == article.category)= item.name
-						.form-group
-							label Tags
-							input.form-control#tags-tf(type='text', name='tags', value= article.tags)
-							p.help-block Multiple tags seprated by comma without space
-					.col-md-7
-						.form-group
-							label Article
-							textarea(name='article') #{article.article}
-					.col-md-12
-						.form-group
-							button(type='button')#article-form-btn1.btn.btn-default
-								| Cancel
-							button(type='submit')#article-form-btn2.btn.btn-primary
-								| Submit
+					.form-group
+						label Title
+						input.form-control#title-tf(type='text', name='titletitle', value= article.title)
+					.form-group
+						label Category
+						select.form-control#category-list(name='category')
+							each item in cats
+								option(value=item._id, selected=item._id == article.category)= item.name
+					.form-group
+						label Tags
+						input.form-control#tags-tf(type='text', name='tags', value= article.tags)
+						p.help-block Multiple tags seprated by comma without space
+					.form-group
+						label Article
+						textarea(name='article') #{article.article}
+					.form-group
+						button(type='button')#article-form-btn1.btn.btn-default
+							| Cancel
+						button(type='submit')#article-form-btn2.btn.btn-primary
+							| Submit
 
 include modals/form-errors

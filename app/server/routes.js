@@ -1,5 +1,4 @@
 
-var CT = require('./modules/country-list');
 var AM = require('./modules/account-manager');
 var EM = require('./modules/email-dispatcher');
 
@@ -7,11 +6,16 @@ var moment 		= require('moment');
 
 module.exports = function(app) {
 
+// main landing page //
+	app.get('/', function(req, res) {
+		res.render('landing', {  title: 'Create Your Easy Knowledge Base'});
+	});
+	
 // main login page //
-	app.get('/', function(req, res){
+	app.get('/login', function(req, res){
 	// check if the user's credentials are saved in a cookie //
 		if (req.cookies.user == undefined || req.cookies.pass == undefined){
-			res.render('login', { title: 'Hello - Please Login To Your Account' });
+			res.render('login', { title: 'Please Login To Your Account' });
 		}	else{
 	// attempt automatic login //
 			AM.autoLogin(req.cookies.user, req.cookies.pass, function(o){
@@ -19,13 +23,13 @@ module.exports = function(app) {
 					req.session.user = o;
 					res.redirect('/home');
 				}	else{
-					res.render('login', { title: 'Hello - Please Login To Your Account' });
+					res.render('login', { title: 'Please Login To Your Account' });
 				}
 			});
 		}
 	});
 	
-	app.post('/', function(req, res){
+	app.post('/login', function(req, res){
 		AM.manualLogin(req.body['user'], req.body['pass'], function(e, o){
 			if (!o){
 				res.status(400).send(e);
@@ -48,8 +52,7 @@ module.exports = function(app) {
 			res.redirect('/');
 		}	else{
 			res.render('home', {
-				title : 'Control Panel',
-				countries : CT,
+				title : 'Home',
 				udata : req.session.user
 			});
 		}
@@ -90,7 +93,7 @@ module.exports = function(app) {
 // creating new accounts //
 	
 	app.get('/signup', function(req, res) {
-		res.render('signup', {  title: 'Signup', countries : CT });
+		res.render('signup', { title: 'Signup' });
 	});
 	
 	app.post('/signup', function(req, res){
@@ -187,7 +190,7 @@ module.exports = function(app) {
 			res.redirect('/');
 		}	else{
 			AM.getAllCategories(req.session.user, function(e, categories){
-				res.render('categories', { title : 'Category List', cats : categories, udata : req.session.user, moment: moment });
+				res.render('categories', { title : 'Manage categories', cats : categories, udata : req.session.user, moment: moment });
 			});
 		}
 	});
@@ -239,7 +242,7 @@ module.exports = function(app) {
 			res.redirect('/');
 		}	else{
 			AM.getAllArticles(req.session.user._id, function(e, articles){
-				res.render('articles', { title : 'Article List', arts : articles, udata : req.session.user, moment: moment });
+				res.render('articles', { title : 'Manage Articles', arts : articles, udata : req.session.user, moment: moment });
 			});
 		}
 	});
@@ -335,7 +338,7 @@ module.exports = function(app) {
 	  AM.getAccountByUserName(req.params.thesubdomain, function(o){
 			if (o){
 				AM.getArticleCategories(o, function(e, categories){
-					res.render('index', { title : 'Knowledgebase', cdata: categories});
+					res.render('index', { title : 'Knowledge Base', cdata: categories});
 				});
 			}	else{
 				res.redirect('/404');
