@@ -27,18 +27,12 @@ function ArticleValidator()
 
 }
 
-ArticleValidator.prototype.showInvalidTitle = function()
-{
-	this.controlGroups[0].addClass('error');
-	this.showErrors(['That article is already in use.']);
-}
-
 ArticleValidator.prototype.validateForm = function()
 {
 	var e = [];
 	for (var i=0; i < this.controlGroups.length; i++) this.controlGroups[i].removeClass('error');
 	if (this.validateTitle(this.formFields[0].val()) == false) {
-		this.controlGroups[0].addClass('error'); e.push('Please Enter Your Article');
+		this.controlGroups[0].addClass('error'); e.push('Please Enter Your Article Title');
 	}
 	if (e.length) this.showErrors(e);
 	return e.length === 0;
