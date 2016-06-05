@@ -1,5 +1,5 @@
 
-tinymce.init({ selector:'textarea', height : 200 });
+tinymce.init({ selector:'textarea', height : 300 });
 
 $(document).ready(function(){
 
@@ -28,6 +28,6 @@ $(document).ready(function(){
 
 // customize the article edit form //
 	
-	$('#article-form h2').text('Edit Article');
+	$('#article-form-container h3').text('Edit Article');
 	
 });

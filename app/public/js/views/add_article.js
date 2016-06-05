@@ -1,5 +1,5 @@
 
-tinymce.init({ selector:'textarea', height : 200 });
+tinymce.init({ selector:'textarea', height : 300 });
 
 $(document).ready(function(){
 

@@ -397,10 +397,11 @@ exports.getAllArticles = function(user, callback)
 
 exports.getAllArticlesTitleByCategory = function(categoryId, callback)
 {
-	Article.find({category: getObjectId(categoryId)}, {title:1},
-		function(e, res) {
-			if (e) callback(e)
-			else callback(null, res)
+	Article.find({category: getObjectId(categoryId)}, {title:1})
+	.limit(5)
+	.exec(function(e, res) {
+		if (e) callback(e)
+		else callback(null, res)
 	});
 }
 
