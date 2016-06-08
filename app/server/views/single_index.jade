@@ -25,10 +25,10 @@ block content
 			.article-feedback
 				h2
 					small Was This Article Helpful?
-				button.btn.btn-success.btn-o.btn-wide(type='button')
+				button.btn.btn-success.btn-o.btn-wide(type='button', onclick='updateArticleLike("#{cdata._id}", true)')
 					i.fa.fa-thumbs-o-up
 					|  Yes
-				button.btn.btn-danger.btn-o.btn-wide(type='button')
+				button.btn.btn-danger.btn-o.btn-wide(type='button', onclick='updateArticleLike("#{cdata._id}", false)')
 					| No 
 					i.fa.fa-thumbs-o-down
 

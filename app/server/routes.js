@@ -404,7 +404,7 @@ module.exports = function(app) {
 		});
 	});
 
-	app.get('/subdomain/:thesubdomain/add-article-like', function(req, res) {
+	app.post('/subdomain/:thesubdomain/add-article-like', function(req, res) {
 		AM.addNewArticleLike({
 			article_id	: req.body['article'],
 			req 		: req.headers, 
