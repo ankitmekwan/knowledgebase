@@ -5,13 +5,13 @@ block content
 
 	.row
 		.col-md-12.margin-top-40.padding-20
-			form(action='action_page.php')
+			form(action='/contactus', method='post')
 				fieldset
 					legend Contact Us
-					label First name
-					input.input-area(type='text', name='firstname', placeholder='Your Name')
+					label Name
+					input.input-area(type='text', name='name', placeholder='Your Name', required='required')
 					label Email
-					input.input-area(type='text', name='email', placeholder='Your email address')
+					input.input-area(type='text', name='email', placeholder='Your email', required='required')
 					label Message:
 					textarea#message.text-area(name='message', rows='7', cols='30')
 					button.btn.btn-wide.btn-success(type='submit', value='Submit') Submit

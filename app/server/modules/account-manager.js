@@ -134,10 +134,39 @@ ArticleLikeSchema.pre('save', function(next) {
 
 mongoose.model('ArticleLike', ArticleLikeSchema);
 
+var contactUsSchema = new Schema({
+	name 	: { type : String, default : '', trim : true },
+	email 	: { type : String, default : '', trim : true },
+	user	: { type : Schema.ObjectId, ref : 'Account' },
+	message	: { type : String, default : ''},
+	date 	: { type : Date, default : Date.now }
+});
+
+contactUsSchema.path('name').required(true, 'User name cannot be blank');
+contactUsSchema.path('email').required(true, 'User email cannot be blank');
+
+contactUsSchema.pre('remove', function (next) {
+  next();
+});
+
+contactUsSchema.pre('save', function(next) {
+  // get the current date
+  var currentDate = new Date();
+  
+  // if created_at doesn't exist, add to that field
+  if (!this.date)
+	this.date = currentDate;
+
+  next();
+});
+
+mongoose.model('ContactUs', contactUsSchema);
+
 var Account = mongoose.model('Account');
 var Category = mongoose.model('Category');
 var Article = mongoose.model('Article');
 var ArticleLike = mongoose.model('ArticleLike');
+var ContactUs = mongoose.model('ContactUs');
 
 /* login validation methods */
 
@@ -520,5 +549,32 @@ exports.addNewArticleLike = function(newData, callback)
 	  if (err) callback(err);
 	  console.log('Article Like saved successfully!');
 	  callback();
+	});
+}
+
+/* conatct us insertion & retrive methods */
+
+exports.addNewContactUs = function(newData, callback)
+{
+	var contactUs = new ContactUs({
+		name 	: newData.name,
+		email 	: newData.email,
+		message : newData.message,
+		user 	: newData.user
+	});
+
+	contactUs.save(function(err) {
+	  if (err) callback(err);
+	  console.log('Contact us saved successfully!');
+	  callback();
+	});
+}
+
+exports.getAllContactUs = function(user, callback)
+{
+	ContactUs.find({"user": user}, 
+		function(e, res) {
+		if (e) callback(e)
+		else callback(null, res)
 	});
 }
