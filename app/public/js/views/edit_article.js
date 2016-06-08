@@ -7,7 +7,9 @@ $(document).ready(function(){
 	var av = new ArticleValidator();
 
 	$('#article-form').ajaxForm({
-		beforeSerialize: function($form, options) { 
+		beforeSerialize: function($form, options) {
+			var article_plain = tinyMCE.activeEditor.getContent({format : 'text'});
+			options.data={'article_plain': article_plain};
     		tinyMCE.triggerSave();
 		},
 		beforeSubmit : function(formData, jqForm, options){

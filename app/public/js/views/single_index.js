@@ -31,4 +31,19 @@ $(document).ready(function(){
 		}
 	});
 
+	this.updateArticleLike = function(articleId, like)
+	{
+		$.ajax({
+			url: '/add-article-like',
+			type: 'POST',
+			data: { article: articleId, like: like },
+			success: function(data){
+	 			console.log('Article Like has been updated successfully.');
+			},
+			error: function(jqXHR){
+				console.log(jqXHR.responseText+' :: '+jqXHR.statusText);
+			}
+		});
+	}
+
 });

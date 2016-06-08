@@ -86,12 +86,13 @@ var getTags = tags => tags.join(',');
 var setTags = tags => tags.split(',');
 
 var ArticleSchema = new Schema({
-	title 	: { type : String, default : '', trim : true },
-	article	: { type : String, default : '', trim : true },
-	category: { type : Schema.ObjectId, ref : 'Category' },
-	tags: { type: [], get: getTags, set: setTags },
-	user	: { type : Schema.ObjectId, ref : 'Account' },
-	date 	: { type : Date, default : Date.now }
+	title 			: { type : String, default : '', trim : true },
+	article			: { type : String, default : '', trim : true },
+	article_plain	: { type : String, default : '', trim : true },
+	category 		: { type : Schema.ObjectId, ref : 'Category' },
+	tags 			: { type: [], get: getTags, set: setTags },
+	user			: { type : Schema.ObjectId, ref : 'Account' },
+	date 			: { type : Date, default : Date.now }
 });
 
 ArticleSchema.path('title').required(true, 'Article title cannot be blank');
@@ -113,18 +114,39 @@ ArticleSchema.pre('save', function(next) {
 
 mongoose.model('Article', ArticleSchema);
 
+var ArticleLikeSchema = new Schema({
+	article: { type : Schema.ObjectId, ref : 'Article' },
+	req: { type: [] },
+	like: { type : Boolean},
+	date 	: { type : Date, default : Date.now }
+});
+
+ArticleLikeSchema.pre('save', function(next) {
+  // get the current date
+  var currentDate = new Date();
+  
+  // if created_at doesn't exist, add to that field
+  if (!this.date)
+	this.date = currentDate;
+
+  next();
+});
+
+mongoose.model('ArticleLike', ArticleLikeSchema);
+
 var Account = mongoose.model('Account');
 var Category = mongoose.model('Category');
 var Article = mongoose.model('Article');
+var ArticleLike = mongoose.model('ArticleLike');
 
 /* login validation methods */
 
 exports.autoLogin = function(user, pass, callback)
 {
 	Account.findOne({email:user}, function(e, o) {
-		if (o){
+		if (o) {
 			o.pass == pass ? callback(o) : callback(null);
-		}	else{
+		} else {
 			callback(null);
 		}
 	});
@@ -133,13 +155,13 @@ exports.autoLogin = function(user, pass, callback)
 exports.manualLogin = function(user, pass, callback)
 {
 	Account.findOne({email:user}, function(e, o) {
-		if (o == null){
+		if (o == null) {
 			callback('user-not-found');
-		}	else{
+		} else {
 			validatePassword(pass, o.pass, function(err, res) {
-				if (res){
+				if (res) {
 					callback(null, o);
-				}	else{
+				} else {
 					callback('invalid-password');
 				}
 			});
@@ -152,14 +174,14 @@ exports.manualLogin = function(user, pass, callback)
 exports.addNewAccount = function(newData, callback)
 {
 	Account.findOne({user:newData.user}, function(e, o) {
-		if (o){
+		if (o) {
 			callback('username-taken');
-		}	else{
+		} else {
 			Account.findOne({email:newData.email}, function(e, o) {
-				if (o){
+				if (o) {
 					callback('email-taken');
-				}	else{
-					saltAndHash(newData.pass, function(hash){
+				} else {
+					saltAndHash(newData.pass, function(hash) {
 
 						var account = new Account({
 							name: newData.name,
@@ -184,7 +206,7 @@ exports.addNewAccount = function(newData, callback)
 exports.updateAccount = function(newData, callback)
 {
 	if (newData.pass == '') {
-		Account.findOneAndUpdate({_id:getObjectId(newData.id)}, {name: newData.name, title: newData.title}, function(err, user){
+		Account.findOneAndUpdate({_id:getObjectId(newData.id)}, {name: newData.name, title: newData.title}, function(err, user) {
 			if (err) callback(err, null);
 
 			// we have the updated user returned to us
@@ -192,8 +214,8 @@ exports.updateAccount = function(newData, callback)
 			callback(null, user);
 		});
 	} else {
-		saltAndHash(newData.pass, function(hash){
-			Account.findOneAndUpdate({_id:getObjectId(newData.id)}, {name: newData.name, title: newData.title, pass:hash}, function(err, user){
+		saltAndHash(newData.pass, function(hash) {
+			Account.findOneAndUpdate({_id:getObjectId(newData.id)}, {name: newData.name, title: newData.title, pass:hash}, function(err, user) {
 				if (err) callback(err, null);
 
 				// we have the updated user returned to us
@@ -206,8 +228,8 @@ exports.updateAccount = function(newData, callback)
 
 exports.updatePassword = function(email, newPass, callback)
 {
-	saltAndHash(newPass, function(hash){
-		Account.findOneAndUpdate({email:email}, {pass:hash}, function(err, user){
+	saltAndHash(newPass, function(hash) {
+		Account.findOneAndUpdate({email:email}, {pass:hash}, function(err, user) {
 			if (err) callback(err, null);
 
 				// we have the updated user returned to us
@@ -230,17 +252,17 @@ exports.deleteAccount = function(id, callback)
 
 exports.getAccountByEmail = function(email, callback)
 {
-	Account.findOne({email:email}, function(e, o){ callback(o); });
+	Account.findOne({email:email}, function(e, o) { callback(o); });
 }
 
 exports.getAccountByUserName = function(user, callback)
 {
-	Account.findOne({user:user}, function(e, o){ callback(o); });
+	Account.findOne({user:user}, function(e, o) { callback(o); });
 }
 
 exports.validateResetLink = function(email, passHash, callback)
 {
-	Account.find({ $and: [{email:email, pass:passHash}] }, function(e, o){
+	Account.find({ $and: [{email:email, pass:passHash}] }, function(e, o) {
 		callback(o ? 'ok' : null);
 	});
 }
@@ -352,11 +374,12 @@ exports.getAllCategories = function(user, callback)
 exports.addNewArticle = function(newData, callback)
 {
 	var article = new Article({
-		title	: newData.title,
-		tags 	: newData.tags,
-		category: getObjectId(newData.category_id),
-		article : newData.article,
-		user 	: newData.user
+		title			: newData.title,
+		tags 			: newData.tags,
+		category 		: getObjectId(newData.category_id),
+		article 		: newData.article,
+		article_plain 	: newData.article_plain,
+		user 			: newData.user
 	});
 
 	article.save(function(err) {
@@ -368,7 +391,7 @@ exports.addNewArticle = function(newData, callback)
 
 exports.updateArticle = function(newData, callback)
 {
-	Article.findOneAndUpdate({_id:getObjectId(newData.id)}, {title:newData.title, tags:newData.tags, category:getObjectId(newData.category_id), article:newData.article}, function(err, user){
+	Article.findOneAndUpdate({_id:getObjectId(newData.id)}, {title:newData.title, tags:newData.tags, category:getObjectId(newData.category_id), article:newData.article, article_plain:newData.article_plain}, function(err, user) {
 		if (err) callback(err, null);
 
 			// we have the updated user returned to us
@@ -480,5 +503,22 @@ exports.searchArticleWCategory = function(search, user, callback) {
 			if (err) callback(err);
 			callback(null, res);
 		});
+	});
+}
+
+/* article like insertion & deletion methods */
+
+exports.addNewArticleLike = function(newData, callback)
+{
+	var articleLike = new ArticleLike({
+		article: getObjectId(newData.article_id),
+		req: newData.req,
+		like : newData.like
+	});
+
+	articleLike.save(function(err) {
+	  if (err) callback(err);
+	  console.log('Article Like saved successfully!');
+	  callback();
 	});
 }
