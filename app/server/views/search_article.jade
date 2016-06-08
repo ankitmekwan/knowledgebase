@@ -12,15 +12,14 @@ block content
 					.page-header
 						h3 Search results for '#{search}'
 					- for art in cdata
-						.col-md-8
+						.col-md-12
 							strong
 								a(href='#')  #{art.title}
-							article!= art.article
+							article= art.article_plain.substr(1, 200) + '...'
 							hr
 	include modals/alert
 	include modals/confirm
 
 block scripts
-	script(src='/js/libs/readmore.min.js')
 	script(src='/js/views/search_article.js')
 	script(src='/js/controllers/searchController.js')

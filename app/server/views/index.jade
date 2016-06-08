@@ -2,22 +2,18 @@
 extends index_layout
 
 block content
-	.col-md-8.padding-20
-		.row
-			.fb-heading
-				| Knowledge Base
-			hr.style-three
+	.row
+		.col-md-12.margin-top-40
 			.row
 				- for cat in cdata
-					.col-md-6.margin-bottom-20
-						div(id=cat._id._id).fat-heading-abb
-							a(href='category/#{cat._id._id}')
-								i.fa.fa-folder
-								|  #{cat._id.name} 
-								span.cat-count (#{cat.total})
-						div(id=cat._id._id + 'artList').fat-content-small.padding-left-30
+					.col-md-4
+						ul(id=cat._id._id).homepage-list
+							li.category-title
+								a(href='category/#{cat._id._id}')
+									i.fa.fa-folder
+									|  #{cat._id.name} 
+								span.art-count (#{cat.total})
 
 block scripts
 
-	script(src='http://localhost:3000/js/libs/readmore.min.js')
 	script(src='http://localhost:3000/js/views/index.js')

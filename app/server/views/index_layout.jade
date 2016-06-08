@@ -4,58 +4,29 @@ html(lang='en')
 		meta(charset='utf-8')
 		meta(http-equiv='X-UA-Compatible', content='IE=edge')
 		meta(name='viewport', content='width=device-width, initial-scale=1')
-		meta(name='description', content='')
-		meta(name='author', content='Ankit Mekwan')
-		title Knowledge Base
-		link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', rel='stylesheet')
+		meta(name='author', content='SVS IT Solutions Pvt. Ltd.')
+		title Knowledgebase
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7', crossorigin='anonymous')
+		link(href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css', rel='stylesheet', integrity='sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1', crossorigin='anonymous')
 		link(href='http://localhost:3000/css/style.css', rel='stylesheet')
+		link(href='http://localhost:3000/css/fonts.css', rel='stylesheet')
 	body
-		// SEARCH FIELD AREA
-		.searchfield.bg-hed-six
-			.container(style='padding-top: 20px; padding-bottom: 20px;')
-				.row.text-center.margin-bottom-20
-					h1.white  Knowledge Base
-				br
-				.row.search-row
-					input#articleSearch.search(type='text', placeholder='What do you need help with?')
-					button#searchButton.buttonsearch.btn.btn-info.btn-lg Search
-		// END SEARCH FIELD AREA
-
-		// MAIN SECTION
-		.container.featured-area-default.padding-30
-			.row
+		.container-fluid.margin-bottom-40
+			.container.bg-white
+				.col-md-12
+					.row
+						h1  Knowledge base 
+					.row.searcharea
+						input#articleSearch.search-area(type='text', placeholder='What are you looking for?')
+						button#searchButton.search-button(type='submit') Search
 
 				block content
 
-				// SIDEBAR STUFF
-				.col-md-4.padding-20
-					.row.margin-bottom-30
-						.col-md-12
-							.support-container
-								h2.support-heading Need more Support?
-								|               If you cannot find an answer in the knowledgebase, you can 
-								a(href='#') contact us
-								|  for further help.
-					.row.margin-top-20
-						.col-md-12
-							.fb-heading-small
-								| Latest Articles
-							hr.style-three
-							#latestAtrList.fat-content-small.padding-left-10
-				// END SIDEBAR STUFF
-		// END MAIN SECTION
-
-		// COPYRIGHT INFO
-		.container-fluid.footer-copyright.marg30
-			.container
-				.pull-left
-					| Copyright © 2016 
-					a(href='http://knowledge-base.site') knowledge-base
-		// END COPYRIGHT INFO
-
-		// LOADING ENDING JAVASCRIPTS
-		script(src='http://code.jquery.com/jquery-2.2.4.min.js')
-		script(src='https://use.fontawesome.com/f5561e785a.js')
-		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+			.container.footer
+				| Copyright © Knowledge Base 2016.
+				span.pull-right
+					a(href='/contactus') Contact us
+		script(src='https://code.jquery.com/jquery-2.2.4.min.js', integrity='sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=', crossorigin='anonymous')
+		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS', crossorigin='anonymous')
 
 		block scripts

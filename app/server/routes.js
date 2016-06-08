@@ -420,6 +420,8 @@ module.exports = function(app) {
 
 	app.get('/subdomain/:thesubdomain/404', function(req, res) { res.render('index_404', { title: 'Page Not Found'}); });
  
+	app.get('/subdomain/:thesubdomain/contactus', function(req, res) { res.render('contactus', { title: 'Contact Us'}); });
+ 
 	app.get('*', function(req, res) { res.render('404', { title: 'Page Not Found'}); });
 
 };

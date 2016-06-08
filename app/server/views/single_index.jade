@@ -2,41 +2,40 @@
 extends index_layout
 
 block content
-	.col-md-8.padding-20
-		.row
-			// ARTICLE
-			.panel.panel-default
-				.article-heading.margin-bottom-5
+
+	.row
+		.col-md-12.margin-top-40
+			.article-title #{cdata.title}
+			.article-info
+				.art-date
 					a(href='#')
-						i.fa.fa-pencil-square-o
-						|  #{cdata.title}
-				.article-info
-					.art-date
-						a(href='#')
-							i.fa.fa-calendar-o
-							|  #{moment(cdata.date).format('LLL')}
-					.art-category
-						a(href='#')
-							i.fa.fa-folder
-							|  #{cdata.category.name}
-				.article-content
-					p!= cdata.article
-				.article-content
-					.article-tags
-						b Tags:
-						if tags
-						- for cat in tags
-							a.btn.btn-default.btn-o.btn-sm(href='#') #{cat}
-				hr.style-three
-				.article-feedback
-					h2
-						small Was This Article Helpful?
-					button.btn.btn-success.btn-o.btn-wide(type='button')
-						i.fa.fa-thumbs-o-up
-						|  Yes
-					button.btn.btn-danger.btn-o.btn-wide(type='button')
-						| No 
-						i.fa.fa-thumbs-o-down
+						i.fa.fa-calendar-o
+						|  #{moment(cdata.date).format('LLL')}
+				.art-category
+					a(href='#')
+						i.fa.fa-folder
+						|  #{cdata.category.name}
+			.article-content
+				p!= cdata.article
+				.article-tags
+					b Tags:
+					if tags
+					- for cat in tags
+						a.btn.btn-default.btn-o.btn-sm(href='#') #{cat}
+			.article-feedback
+				h2
+					small Was This Article Helpful?
+				button.btn.btn-success.btn-o.btn-wide(type='button')
+					i.fa.fa-thumbs-o-up
+					|  Yes
+				button.btn.btn-danger.btn-o.btn-wide(type='button')
+					| No 
+					i.fa.fa-thumbs-o-down
+
+		.row
+			.col-md-12.margin-top-20
+				.related-art
+					#latestAtrList.related-art-title Latest Articles
 
 block scripts
 

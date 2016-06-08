@@ -1,0 +1,21 @@
+
+extends index_layout
+
+block content
+
+	.row
+		.col-md-12.margin-top-40.padding-20
+			form(action='action_page.php')
+				fieldset
+					legend Contact Us
+					label First name
+					input.input-area(type='text', name='firstname', placeholder='Your Name')
+					label Email
+					input.input-area(type='text', name='email', placeholder='Your email address')
+					label Message:
+					textarea#message.text-area(name='message', rows='7', cols='30')
+					button.btn.btn-wide.btn-success(type='submit', value='Submit') Submit
+
+block scripts
+
+	script(src='http://localhost:3000/js/views/contactus.js')

@@ -2,32 +2,18 @@
 extends index_layout
 
 block content
-	.col-md-8.padding-20
-		.row
-			.fb-heading
-				i.fa.fa-search
-				|  Search Results for: #{search}
-			hr.style-three
-			- for art in cdata
-				.panel.panel-default
-					.article-heading-abb
-						a(href='/article/#{art._id}')
-							i.fa.fa-pencil-square-o
-							|  #{art.title}
-					.article-info
-						.art-date
-							a(href='#')
-								i.fa.fa-calendar-o
-								|  #{moment(cdata.date).format('LLL')}
-						.art-category
-							a(href='#')
-								i.fa.fa-folder
-								|  #{art.category.name} 
-					.article-content
-						article
-							p.block-with-text!= art.article
+
+	.row
+		.col-md-12.margin-top-40
+			ul.category-list
+				li.category-title
+					Search Results for: '#{search}'
+				- for art in cdata
+					li
+						a(href='/article/#{art._id}') #{art.title}
+						span.article-overview= art.article_plain.substr(1, 200) + '...'
+							a(href='/article/#{art._id}') read more
 
 block scripts
 
-	script(src='http://localhost:3000/js/libs/readmore.min.js')
 	script(src='http://localhost:3000/js/views/index_search.js')
