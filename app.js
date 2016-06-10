@@ -23,10 +23,10 @@ app.use(express.static(__dirname + '/app/public'));
 
 // build mongo database connection url //
 
-var connection_string = '127.0.0.1:27017/knowledgebase';
+var connection_string = 'mongodb://127.0.0.1:27017/knowledgebase';
 // if OPENSHIFT env variables are present, use the available connection info:
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
-  connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+  connection_string = 'mongodb://' + process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
   process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
   process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
   process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
