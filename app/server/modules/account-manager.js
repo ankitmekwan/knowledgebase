@@ -9,13 +9,17 @@ var mongoose 	= require("mongoose");
 	ESTABLISH DATABASE CONNECTION
 */
 
-var dbName = process.env.DB_NAME || 'node-login';
-var dbHost = process.env.DB_HOST || 'localhost'
-var dbPort = process.env.DB_PORT || 27017;
+var connection_string = 'mongodb://127.0.0.1:27017/knowledgebase';
+// if OPENSHIFT env variables are present, use the available connection info:
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
+  connection_string = 'mongodb://' + process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+  process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+  process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+  process.env.OPENSHIFT_APP_NAME;
+}
 
-var dbURL = 'mongodb://'+dbHost+':'+dbPort+'/'+dbName;
-
-mongoose.connect(dbURL);
+mongoose.connect(connection_string);
 
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));
