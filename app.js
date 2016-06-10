@@ -23,14 +23,14 @@ app.use(express.static(__dirname + '/app/public'));
 
 // build mongo database connection url //
 
-var dbHost = process.env.DB_HOST || 'localhost'
-var dbPort = process.env.DB_PORT || 27017;
-var dbName = process.env.DB_NAME || 'node-login';
-
-var dbURL = 'mongodb://'+dbHost+':'+dbPort+'/'+dbName;
-if (app.get('env') == 'live'){
-// prepend url with authentication credentials // 
-	dbURL = 'mongodb://'+process.env.DB_USER+':'+process.env.DB_PASS+'@'+dbHost+':'+dbPort+'/'+dbName;
+var connection_string = '127.0.0.1:27017/knowledgebase';
+// if OPENSHIFT env variables are present, use the available connection info:
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
+  connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+  process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+  process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+  process.env.OPENSHIFT_APP_NAME;
 }
 
 app.use(session({
@@ -38,7 +38,7 @@ app.use(session({
 	proxy: true,
 	resave: true,
 	saveUninitialized: true,
-	store: new MongoStore({ url: dbURL })
+	store: new MongoStore({ url: connection_string })
 	})
 );
 
