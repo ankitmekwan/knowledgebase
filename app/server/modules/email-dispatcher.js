@@ -23,7 +23,7 @@ EM.dispatchResetPasswordLink = function(account, callback)
 
 EM.composeEmail = function(o)
 {
-	var link = 'localhost:3000/reset-password?e='+o.email+'&p='+o.pass;
+	var link = 'http://knowledge-base.site/reset-password?e='+o.email+'&p='+o.pass;
 	var html = "<html><body>";
 		html += "Hi "+o.name+",<br><br>";
 		html += "Your username is <b>"+o.user+"</b><br><br>";
