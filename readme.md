@@ -1,3 +1,4 @@
+[![Dependency Status](https://www.versioneye.com/user/projects/5760f3394931050036a5e9dd/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5760f3394931050036a5e9dd)
 #[Knowledge Base](http://knowledge-base.site)
 
 ###A Create Your Easy Knowledge Base!
