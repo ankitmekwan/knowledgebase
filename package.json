@@ -11,19 +11,19 @@
     "url": "https://bunty5322@bitbucket.org/svsitteam/supportz.git"
   },
   "dependencies": {
-    "body-parser": "1.14.1",
-    "connect-mongo": "0.8.2",
-    "cookie-parser": "1.4.0",
+    "body-parser": "1.15.1",
+    "connect-mongo": "1.2.0",
+    "cookie-parser": "1.4.3",
     "emailjs": "^1.0.4",
-    "errorhandler": "1.4.2",
-    "express": "4.13.3",
-    "express-session": "1.11.3",
-    "express-subdomain-handler": "0.0.4",
+    "errorhandler": "1.4.3",
+    "express": "4.13.4",
+    "express-session": "1.13.0",
+    "express-subdomain-handler": "0.1.0",
     "jade": "1.11.0",
-    "moment": "2.10.3",
-    "mongodb": "2.0.45",
-    "stylus": "0.52.4",
-    "mongoose": "4.4.19"
+    "moment": "2.13.0",
+    "mongodb": "2.1.21",
+    "stylus": "0.54.5",
+    "mongoose": "4.5.0"
   },
   "engines": {
     "node": "4.2.1"
