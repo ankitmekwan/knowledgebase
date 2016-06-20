@@ -12,7 +12,7 @@ var app = express();
 
 app.locals.pretty = true;
 app.set('port', process.env.PORT || 3000);
-app.use(subdomain({ base : 'localhost', removeWWW : true }));
+app.use(subdomain({ base : 'knowledge-base.site/', removeWWW : true }));
 app.set('views', __dirname + '/app/server/views');
 app.set('view engine', 'jade');
 app.use(cookieParser());
