@@ -16,7 +16,7 @@
     "cookie-parser": "1.4.3",
     "emailjs": "^1.0.4",
     "errorhandler": "1.4.3",
-    "express": "4.13.4",
+    "express": "4.14.0",
     "express-session": "1.13.0",
     "express-subdomain-handler": "0.1.0",
     "jade": "1.11.0",
