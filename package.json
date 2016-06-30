@@ -11,8 +11,8 @@
     "url": "https://bunty5322@bitbucket.org/svsitteam/supportz.git"
   },
   "dependencies": {
-    "body-parser": "1.15.1",
-    "connect-mongo": "1.2.0",
+    "body-parser": "1.15.2",
+    "connect-mongo": "1.2.1",
     "cookie-parser": "1.4.3",
     "emailjs": "^1.0.4",
     "errorhandler": "1.4.3",
@@ -23,7 +23,7 @@
     "moment": "2.13.0",
     "mongodb": "2.1.21",
     "stylus": "0.54.5",
-    "mongoose": "4.5.0"
+    "mongoose": "4.5.2"
   },
   "engines": {
     "node": "4.2.1"
