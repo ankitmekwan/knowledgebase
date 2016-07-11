@@ -171,6 +171,10 @@ module.exports = function(app) {
 		})
 	});
 	
+	app.get('/terms', function(req, res) {
+		res.render('terms', { title : 'Terms and Conditions of Use' });
+	});
+	
 	app.post('/delete', function(req, res) {
 		AM.deleteAccount(req.body.id, function(e, obj) {
 			if (!e) {
