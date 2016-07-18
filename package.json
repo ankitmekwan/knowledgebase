@@ -21,7 +21,7 @@
     "express-subdomain-handler": "0.1.0",
     "jade": "1.11.0",
     "moment": "2.14.1",
-    "mongodb": "2.2.1",
+    "mongodb": "2.2.2",
     "stylus": "0.54.5",
     "mongoose": "4.5.4"
   },
