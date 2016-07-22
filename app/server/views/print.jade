@@ -47,13 +47,15 @@ html(lang='en')
 						table.table.table-bordered.table-striped
 							thead
 								tr
-									th(width='33%') Name
-									th(width='33%') Username
-									th(width='33%') Created
+									th(width='25%') Name
+									th(width='25%') Email
+									th(width='25%') Sub Domain
+									th(width='25%') Created
 							tbody
 							- for (var i = 0; i < accts.length; i++)
 								tr
 									td= accts[i].name
+									td= accts[i].email
 									td= accts[i].user
 									td= moment(accts[i].date).format('LL')
 
