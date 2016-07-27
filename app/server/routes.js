@@ -374,7 +374,7 @@ module.exports = function(app) {
 	  AM.getAccountByUserName(req.params.thesubdomain, function(o) {
 			if (o) {
 				AM.findArticleByIdWCategory(req.params.articleId, function(e, article) {
-					res.render('single_index', { title : article.title, cdata: article, tags: article.tags.trim() != '' ? article.tags.split(',') : '', moment: moment });
+					res.render('single_index', { title : article.title, heading: o.title, cdata: article, tags: article.tags.trim() != '' ? article.tags.split(',') : '', moment: moment });
 				});
 			} else {
 				res.redirect('/index_404');
@@ -387,7 +387,7 @@ module.exports = function(app) {
 			if (o) {
 				AM.getAllArticlesByCategory(req.params.categoryId, function(e, articles) {
 					AM.findCategoryNameById(req.params.categoryId, function(e, categoryName) {
-						res.render('single_category', { title : categoryName, cdata: articles, categoryName: categoryName, moment: moment });
+						res.render('single_category', { title : categoryName, heading: o.title, cdata: articles, categoryName: categoryName, moment: moment });
 					});
 				});
 			} else {
@@ -400,7 +400,7 @@ module.exports = function(app) {
 	  AM.getAccountByUserName(req.params.thesubdomain, function(o) {
 			if (o) {
 				AM.searchArticleWCategory(req.params.search, o, function(e, articles) {
-					res.render('index_search', { title : req.params.search, cdata: articles, search: req.params.search, moment: moment });
+					res.render('index_search', { title : req.params.search, cdata: articles, heading: o.title, search: req.params.search, moment: moment });
 				});
 			} else {
 				res.redirect('/index_404');
@@ -448,7 +448,7 @@ module.exports = function(app) {
 	app.get('/subdomain/:thesubdomain/contactus', function(req, res) {
 	  AM.getAccountByUserName(req.params.thesubdomain, function(o) {
 			if (o) {
-				res.render('contactus', { title : 'Contact Us'});
+				res.render('contactus', { title : 'Contact Us', heading: o.title});
 			} else {
 				res.redirect('/index_404');
 			}
