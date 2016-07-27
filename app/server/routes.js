@@ -344,7 +344,7 @@ module.exports = function(app) {
 	  AM.getAccountByUserName(req.params.thesubdomain, function(o) {
 			if (o) {
 				AM.getArticleCategories(o, function(e, categories) {
-					res.render('index', { title : 'Home', cdata: categories});
+					res.render('index', { title : 'Home', cdata: categories, heading: o.title});
 				});
 			} else {
 				res.redirect('/index_404');
