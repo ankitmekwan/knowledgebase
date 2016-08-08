@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var errorHandler = require('errorhandler');
 var cookieParser = require('cookie-parser');
 var MongoStore = require('connect-mongo')(session);
+var bugsnag = require("bugsnag");
 
 var app = express();
 
@@ -39,5 +40,7 @@ app.use(session({
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+bugsnag.register("6a0435ee14ec1c54c2d0f4f60e5fac28");
 
 require('./app/server/routes')(app);

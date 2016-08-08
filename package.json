@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "body-parser": "1.15.2",
+    "bugsnag": "^1.7.0",
     "connect-mongo": "1.3.2",
     "cookie-parser": "1.4.3",
     "emailjs": "^1.0.4",
@@ -22,8 +23,8 @@
     "jade": "1.11.0",
     "moment": "2.14.1",
     "mongodb": "2.2.5",
-    "stylus": "0.54.5",
-    "mongoose": "4.5.7"
+    "mongoose": "4.5.8",
+    "stylus": "0.54.5"
   },
   "engines": {
     "node": "4.2.1"
