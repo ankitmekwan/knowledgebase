@@ -21,9 +21,9 @@
     "express-session": "1.14.1",
     "express-subdomain-handler": "0.1.0",
     "jade": "1.11.0",
-    "moment": "2.15.1",
-    "mongodb": "2.2.10",
-    "mongoose": "4.6.1",
+    "moment": "2.15.2",
+    "mongodb": "2.2.11",
+    "mongoose": "4.6.5",
     "stylus": "0.54.5"
   },
   "engines": {
